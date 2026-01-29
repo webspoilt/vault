@@ -1,85 +1,60 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 export function CursorFollower() {
-  const cursorX = useMotionValue(0)
-  const cursorY = useMotionValue(0)
-  const [isHovering, setIsHovering] = useState(false)
-
-  const springConfig = {
-    damping: 30,
-    stiffness: 200,
-  }
-
-  const springX = useSpring(cursorX, springConfig)
-  const springY = useSpring(cursorY, springConfig)
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      cursorX.set(e.clientX)
-      cursorY.set(e.clientY)
-    }
-
-    const handleMouseEnter = () => setIsHovering(true)
-    const handleMouseLeave = () => setIsHovering(false)
-
-    // Track hoverable elements
-    const hoverableElements = document.querySelectorAll('a, button, [role="button"]')
-    hoverableElements.forEach(el => {
-      el.addEventListener('mouseenter', handleMouseEnter)
-      el.addEventListener('mouseleave', handleMouseLeave)
-    })
-
-    window.addEventListener('mousemove', handleMouseMove)
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      hoverableElements.forEach(el => {
-        el.removeEventListener('mouseenter', handleMouseEnter)
-        el.removeEventListener('mouseleave', handleMouseLeave)
+      setCursorPos({
+        x: e.clientX,
+        y: e.clientY
       })
     }
-  }, [cursorX, cursorY])
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
 
   return (
     <>
-      {/* Large glow cursor */}
+      {/* Small, crisp cursor - faster response */}
       <motion.div
         style={{
-          x: springX,
-          y: springY,
+          x: cursorPos.x,
+          y: cursorPos.y,
         }}
-        className="fixed top-0 left-0 w-32 h-32 -ml-16 -mt-16 rounded-full pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 w-16 h-16 -ml-8 -mt-8 rounded-full pointer-events-none z-[9999]"
         animate={{
-          scale: isHovering ? 0.5 : 1,
-          opacity: isHovering ? 0.8 : 0.3,
+          scale: 1,
         }}
         transition={{
-          duration: 0.2,
+          type: "spring",
+          stiffness: 500,
+          damping: 40,
         }}
       >
-        <div className="w-full h-full rounded-full bg-gradient-to-br from-emerald-500/30 via-cyan-500/20 to-violet-500/30 blur-3xl" />
+        <div className="w-full h-full rounded-full bg-gradient-to-br from-emerald-400/40 via-cyan-400/20 to-violet-400/40 backdrop-blur-sm" />
       </motion.div>
 
-      {/* Inner core cursor */}
+      {/* Compact center point */}
       <motion.div
         style={{
-          x: springX,
-          y: springY,
+          x: cursorPos.x,
+          y: cursorPos.y,
         }}
-        className="fixed top-0 left-0 w-4 h-4 -ml-2 -mt-2 rounded-full pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 w-4 h-4 -ml-2 -mt-2 rounded-full pointer-events-none z-[9999] bg-emerald-400"
         animate={{
-          scale: isHovering ? 2 : 1,
-          opacity: 1,
+          scale: [1, 1.2, 1],
         }}
         transition={{
-          duration: 0.15,
+          duration: 0.5,
+          repeat: Infinity,
+          ease: "easeInOut",
         }}
-      >
-        <div className="w-full h-full rounded-full bg-emerald-400 shadow-[0_0_20px_10px_rgba(16,185,129,0.5)]" />
-      </motion.div>
+      />
     </>
   )
 }

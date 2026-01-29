@@ -112,10 +112,10 @@ export function DownloadSection() {
                   >
                     {platform.icon}
                   </motion.div>
-                  
+
                   <h3 className="text-3xl font-bold text-white mb-3">{platform.name}</h3>
                   <p className="text-gray-400 text-lg mb-6">{platform.description}</p>
-                  
+
                   <motion.a
                     href={platform.downloadUrl}
                     whileHover={{ scale: 1.05 }}
@@ -161,7 +161,7 @@ export function DownloadSection() {
           className="text-center"
         >
           <motion.a
-            href="https://github.com/webspoilt/blackhole_in_space"
+            href="https://github.com/webspoilt/blackhole_in_space/tree/"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}

@@ -12,7 +12,7 @@ export function BackgroundScene() {
 
   // Create massive particle field - universe scale
   const particles = useMemo(() => {
-    const count = 15000
+    const count = 6000
     const positions = new Float32Array(count * 3)
     const colors = new Float32Array(count * 3)
     const sizes = new Float32Array(count)
@@ -103,69 +103,53 @@ export function BackgroundScene() {
     const positions = particlesRef.current.geometry.attributes.position.array as Float32Array
     const colors = particlesRef.current.geometry.attributes.color.array as Float32Array
 
-    // Supermassive black hole in center + cursor influence
+    // Replace the existing for loop with this optimized version:
     const blackHoleCenter = new THREE.Vector3(cursorPos.current.x * 8, cursorPos.current.y * 4, -12)
-    const blackHoleMass = 50 // Supermassive
+    const blackHoleMass = 50
 
     for (let i = 0; i < positions.length / 3; i++) {
-      const i3 = i * 3
-
-      // Get current position
-      const pos = new THREE.Vector3(positions[i3], positions[i3 + 1], positions[i3 + 2])
-
-      // Calculate distance to black hole (cursor)
-      const distToHole = pos.distanceTo(blackHoleCenter)
-
-      // Black hole gravitational pull - stronger when closer
-      if (distToHole < 20) {
-        const pullStrength = (blackHoleMass / (distToHole * distToHole)) * 0.005
+        const i3 = i * 3
+        const pos = new THREE.Vector3(positions[i3], positions[i3 + 1], positions[i3 + 2])
+        
+        // Only process particles close to cursor
+        const distToHole = pos.distanceTo(blackHoleCenter)
+        
+        if (distToHole < 25) {
+        const pullStrength = Math.min(0.01, blackHoleMass / (distToHole * distToHole))
         const dirToHole = new THREE.Vector3().subVectors(blackHoleCenter, pos).normalize()
         pos.addScaledVector(dirToHole, pullStrength)
-
-        // Spiral motion around black hole
-        const rotationAxis = new THREE.Vector3(0, 0, 1)
-        const rotationAngle = 0.03 * pullStrength * 50
-        pos.applyAxisAngle(rotationAxis, rotationAngle)
-
-        // Stretch into event horizon
-        const stretch = 1 + (20 - distToHole) * 0.02
+        
+        // Stretch near event horizon
         if (distToHole < 5) {
-          pos.x *= 0.8
-          pos.y *= 0.8
-          colors[i3] *= 0.99 // Fade into black hole
-          colors[i3 + 1] *= 0.99
-          colors[i3 + 2] *= 0.99
+            pos.x *= 0.9
+            pos.y *= 0.9
         }
-      }
+        
+        // Simplified color update
+        const intensity = Math.max(0, 1 - distToHole / 40)
+        colors[i3] = Math.min(0.15, 0.02 + intensity * 0.3)
+        colors[i3 + 1] = Math.min(0.4, 0.05 + intensity * 0.5)
+        colors[i3 + 2] = Math.min(0.5, 0.1 + intensity * 0.6)
+        } else {
+        // Simple drift for distant particles
+        pos.x += particles.velocities[i3] * 0.05
+        pos.y += particles.velocities[i3 + 1] * 0.05
+        
+        // Slight rotation
+        const spiralAngle = time * 0.03 + i * 0.00002
+        const currentRadius = Math.sqrt(pos.x * pos.x + pos.y * pos.y)
+        pos.x = Math.cos(spiralAngle) * currentRadius
+        pos.y = Math.sin(spiralAngle) * currentRadius
+        }
 
-      // Cosmic drift
-      pos.x += particles.velocities[i3] * 0.15
-      pos.y += particles.velocities[i3 + 1] * 0.15
-      pos.z += particles.velocities[i3 + 2] * 0.05
+        positions[i3] = pos.x
+        positions[i3 + 1] = pos.y
+        positions[i3 + 2] = pos.z
 
-      // Large-scale spiral motion - galaxy rotation
-      const spiralAngle = time * 0.08 + i * 0.00005
-      const spiralRadius = Math.sqrt(pos.x * pos.x + pos.y * pos.y)
-      pos.x = Math.cos(spiralAngle) * spiralRadius
-      pos.y = Math.sin(spiralAngle) * spiralRadius
-
-      // Update position
-      positions[i3] = pos.x
-      positions[i3 + 1] = pos.y
-      positions[i3 + 2] = pos.z
-
-      // Dynamic color based on proximity to black hole
-      const distToCenter = pos.length()
-      const intensity = Math.max(0, 1 - distToCenter / 50)
-
-      // Brighten and shift colors near black hole
-      colors[i3] = Math.min(0.2, 0.02 + intensity * 0.5)
-      colors[i3 + 1] = Math.min(0.5, 0.05 + intensity * 0.7)
-      colors[i3 + 2] = Math.min(0.6, 0.1 + intensity * 0.8)
+        // Batch update attributes
+        particlesRef.current.geometry.attributes.position.needsUpdate = true
+        particlesRef.current.geometry.attributes.color.needsUpdate = true
     }
-
-    particlesRef.current.geometry.attributes.position.needsUpdate = true
-    particlesRef.current.geometry.attributes.color.needsUpdate = true
 
     // Slow rotation of entire universe
     particlesRef.current.rotation.z = time * 0.015
