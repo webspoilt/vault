@@ -1,50 +1,8 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
-import { useFrame } from '@react-three/fiber'
 import { Canvas } from '@react-three/fiber'
-import { Environment, PerspectiveCamera, OrbitControls } from '@react-three/drei'
-import * as THREE from 'three'
+import { PerspectiveCamera } from '@react-three/drei'
 import { BackgroundScene, BlackHole, CosmicRings, NebulaClouds } from './BackgroundScene'
-
-function BackgroundAnimation() {
-  const groupRef = useRef<THREE.Group>(null)
-  const [scrollProgress, setScrollProgress] = useState(0)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
-      const progress = window.scrollY / scrollHeight
-      setScrollProgress(progress)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useFrame((state) => {
-    if (!groupRef.current) return
-    const time = state.clock.getElapsedTime()
-
-    // Rotate entire universe based on scroll - more dramatic
-    groupRef.current.rotation.y = time * 0.03 + scrollProgress * Math.PI * 3
-    groupRef.current.rotation.x = Math.sin(time * 0.08) * 0.3 + scrollProgress * 0.8
-
-    // Dynamic camera movement through universe
-    state.camera.position.y = -scrollProgress * 15
-    state.camera.position.x = Math.sin(time * 0.1) * scrollProgress * 3
-    state.camera.position.z = 25 + Math.sin(time * 0.05) * 5
-  })
-
-  return (
-    <group ref={groupRef}>
-      <BackgroundScene />
-      <BlackHole position={[0, 8, -18]} />
-      <CosmicRings position={[0, -8, -12]} />
-      <NebulaClouds />
-    </group>
-  )
-}
 
 export function ImmersiveScene() {
   return (
@@ -55,13 +13,6 @@ export function ImmersiveScene() {
         style={{ background: 'transparent' }}
       >
         <PerspectiveCamera makeDefault position={[0, 0, 25]} fov={65} />
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          maxPolarAngle={Math.PI / 1.4}
-          minPolarAngle={Math.PI / 3.5}
-          rotateSpeed={0.15}
-        />
 
         {/* Deep universe lighting */}
         <ambientLight intensity={0.15} />
@@ -70,9 +21,10 @@ export function ImmersiveScene() {
         <pointLight position={[0, 0, -30]} intensity={0.5} color="#8b5cf6" />
         <pointLight position={[30, -20, -20]} intensity={0.3} color="#f43f5e" />
 
-        <Environment preset="night" />
-
-        <BackgroundAnimation />
+        <BackgroundScene />
+        <BlackHole />
+        <CosmicRings />
+        <NebulaClouds />
       </Canvas>
 
       {/* Deep space vignette */}
