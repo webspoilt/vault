@@ -57,24 +57,7 @@ export default function PricingPage() {
     return (
         <div className="min-h-screen bg-[#0a0f1a] font-inter">
             {/* Navigation */}
-            <nav className="border-b border-white/10 backdrop-blur-xl bg-[#0a0f1a]/90 sticky top-0 z-50">
-                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <Link href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-                        <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                            <Shield className="w-5 h-5 text-white" />
-                        </div>
-                        VAULT <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
-                    </Link>
-                    <div className="hidden md:flex items-center gap-8">
-                        <Link href="/features" className="text-sm font-medium text-gray-300 hover:text-white">Product</Link>
-                        <Link href="/security" className="text-sm font-medium text-gray-300 hover:text-white">Security</Link>
-                        <Link href="/pricing" className="text-sm font-medium text-white border-b-2 border-blue-500 pb-1">Pricing</Link>
-                    </div>
-                    <Link href="/contact-sales" className="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 px-5 py-2.5 rounded-lg transition-all shadow-lg shadow-blue-900/20">
-                        Contact Sales
-                    </Link>
-                </div>
-            </nav>
+
 
             <div className="pt-24 pb-12">
                 <div className="max-w-7xl mx-auto px-6">
