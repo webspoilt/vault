@@ -6,6 +6,7 @@
 
 <p align="center">
   <b>The Secure Messaging Platform That Swallows All Traces</b><br>
+  <b>(Verifiable Audit & Unified Ledger Technologies)</b><br>
   <i>What enters the VAULT, never leaves. Not even light. Not even hackers.</i>
 </p>
 
@@ -107,9 +108,9 @@ docker-compose up -d
 
 ### Access Points
 
-- 🌐 **Web Interface**: https://localhost:3000
-- 🔌 **WebSocket API**: wss://localhost:8080
-- 📊 **Metrics**: https://localhost:9090
+- 🌐 **Web Interface**: [https://b2g-vault.vercel.app](https://b2g-vault.vercel.app)
+- 🔌 **API Documentation**: [https://b2g-vault.vercel.app/api](https://b2g-vault.vercel.app/api)
+- 📊 **Status**: [https://b2g-vault.vercel.app/status](https://b2g-vault.vercel.app/status)
 
 ---
 
