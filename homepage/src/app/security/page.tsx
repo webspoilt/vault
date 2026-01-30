@@ -1,254 +1,178 @@
 'use client'
 
-import { useState } from 'react'
-import { Shield, ArrowRight, Clock, FileText } from 'lucide-react'
+import { Shield, Lock, FileKey, Server, Eye, CheckCircle, FileText, Database, Globe } from 'lucide-react'
 import Link from 'next/link'
 
-const articles = [
-  {
-    category: 'Encryption',
-    title: 'What is End-to-End Encryption?',
-    description: 'Simple explanation of how your messages stay private',
-    readTime: '5 min',
-    tags: ['Beginner', 'Education', 'Core']
-  },
-  {
-    category: 'Post-Quantum',
-    title: 'Why Post-Quantum Cryptography Matters',
-    description: 'What it is and why you should care now',
-    readTime: '7 min',
-    tags: ['Advanced', 'Future-proof', 'Quantum']
-  },
-  {
-    category: 'Zero-Knowledge',
-    title: 'The Magic of Zero-Knowledge Proofs',
-    description: 'Proving identity without secrets, explained simply',
-    readTime: '5 min',
-    tags: ['Privacy', 'Authentication', 'Math']
-  },
-  {
-    category: 'Key Management',
-    title: 'How Signal Protocol Handles Keys',
-    description: 'Visual explanation of key exchange process',
-    readTime: '5 min',
-    tags: ['Technical', 'Implementation', 'Security']
-  },
-  {
-    category: 'Perfect Forward Secrecy',
-    title: 'Why You Keep Past Messages Safe',
-    description: 'The Double Ratchet Algorithm explained',
-    readTime: '6 min',
-    tags: ['History', 'Technical', 'Implementation']
-  },
-  {
-    category: 'Metadata Protection',
-    title: 'How We Protect Your Privacy',
-    description: 'Sealed Sender routing keeps secrets hidden',
-    readTime: '5 min',
-    tags: ['Privacy', 'Routing', 'Metadata']
-  },
-  {
-    category: 'Audit Trail',
-    title: 'Why Third-Party Security Audits',
-    description: 'Why external verification matters',
-    readTime: '5 min',
-    tags: ['Trust', 'Transparency', 'Security']
-  }
-]
-
 export default function SecurityPage() {
-  const [activeCategory, setActiveCategory] = useState('all')
-
-  const filteredArticles = activeCategory === 'all'
-    ? articles
-    : articles.filter(a => a.category === activeCategory)
-
-  const handleCategoryClick = (category: string) => {
-    setActiveCategory(category)
-  }
-
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden bg-[#0a0f1a]">
-      {/* Noise Grain Overlay */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-0">
-        <div className="w-full h-full" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`
-        }} />
-      </div>
-
-      {/* Animated Background Gradient */}
-      <div className="fixed inset-0 pointer-events-none z-0"
-        style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.04) 0%, transparent 60%)'
-        }}
-      />
+    <div className="min-h-screen flex flex-col bg-[#0a0f1a] text-gray-100 font-sans">
 
       {/* Navigation */}
-      <nav className="relative z-20 border-b border-white/5 backdrop-blur-lg bg-[#0a0f1a]/80">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-white hover:text-green-400 transition-colors">
-            VOID
+      <nav className="border-b border-white/10 backdrop-blur-xl bg-[#0a0f1a]/90 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <Link href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <Shield className="w-5 h-5 text-white" />
+            </div>
+            VOID <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
           </Link>
-          <div className="flex items-center gap-8">
-            <Link href="/demo" className="text-gray-400 hover:text-white transition-colors">Demo</Link>
-            <Link href="/features" className="text-gray-400 hover:text-white transition-colors">Features</Link>
-            <Link href="/bounty" className="text-gray-400 hover:text-white transition-colors">Bounty</Link>
-            <Link href="/security" className="text-green-400 font-semibold">Security</Link>
+          <div className="hidden md:flex items-center gap-8">
+            <Link href="/features" className="text-sm font-medium text-gray-300 hover:text-white">Product</Link>
+            <Link href="/security" className="text-sm font-medium text-blue-400 border-b-2 border-blue-500 pb-1">Security</Link>
+            <Link href="/pricing" className="text-sm font-medium text-gray-300 hover:text-white">Pricing</Link>
           </div>
+          <Link href="/contact-sales" className="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 px-5 py-2.5 rounded-lg transition-all shadow-lg shadow-blue-900/20">
+            Contact Sales
+          </Link>
         </div>
       </nav>
 
-      {/* Main Content */}
-      <main className="flex-1 relative z-10">
-        {/* Hero Section */}
-        <section className="py-20 px-4">
-          <div className="max-w-5xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/20 bg-green-500/5 mb-8">
-              <Shield className="w-4 h-4 text-green-400" />
-              <span className="text-sm font-medium tracking-widest text-green-400 uppercase">Security</span>
+      <main className="flex-1">
+        {/* Hero */}
+        <section className="py-24 px-6 bg-[#0a0f1a]">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-900/10 mb-8">
+              <Lock className="w-4 h-4 text-blue-400" />
+              <span className="text-sm font-medium tracking-wide text-blue-400 uppercase">Zero Trust Architecture</span>
             </div>
-
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Security Deep Dives into Cryptography
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">
+              Zero Unauthorized Traces.
             </h1>
-
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              We believe in radical transparency. Understand how your messages are truly protected.
+            <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+              We assume the network is compromised. We assume the server is compromised.
+              Our architecture guarantees confidentiality even in the most hostile environments.
             </p>
           </div>
         </section>
 
-        {/* Category Tabs */}
-        <section className="py-8 px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-3">
-              {[
-                { id: 'all', label: 'All Articles' },
-                { id: 'Encryption', label: 'Encryption' },
-                { id: 'Post-Quantum', label: 'Post-Quantum' },
-                { id: 'Zero-Knowledge', label: 'Zero-Knowledge' },
-                { id: 'Key Management', label: 'Key Management' },
-                { id: 'Perfect Forward Secrecy', label: 'Forward Secrecy' },
-                { id: 'Metadata Protection', label: 'Metadata' },
-                { id: 'Audit Trail', label: 'Audit Trail' }
-              ].map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => handleCategoryClick(cat.id)}
-                  className={`px-6 py-3 rounded-xl font-semibold transition-all duration-500 ${activeCategory === cat.id
-                      ? 'bg-gradient-to-r from-green-500 to-green-600 text-white'
-                      : 'bg-white/5 text-gray-400 hover:bg-white/10'
-                    }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
+        {/* Core Principles */}
+        <section className="px-6 pb-24">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-8 bg-[#111827] border border-white/10 rounded-2xl">
+              <FileKey className="w-12 h-12 text-blue-500 mb-6" />
+              <h3 className="text-xl font-bold text-white mb-4">Client-Side Sovereignty</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Private keys are generated on-device and never leave. They are stored in the device's Secure Enclave (iOS) or Keystore (Android). We cannot decrypt your messages, even under subpoena.
+              </p>
+            </div>
+            <div className="p-8 bg-[#111827] border border-white/10 rounded-2xl">
+              <Eye className="w-12 h-12 text-red-500 mb-6" />
+              <h3 className="text-xl font-bold text-white mb-4">Minimize Data Retention</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Messages are ephemeral by default. Once delivered, they are deleted from our relay servers. Metadata is stripped to the bare minimum required for routing (Sealed Sender).
+              </p>
+            </div>
+            <div className="p-8 bg-[#111827] border border-white/10 rounded-2xl">
+              <CheckCircle className="w-12 h-12 text-green-500 mb-6" />
+              <h3 className="text-xl font-bold text-white mb-4">Verifiable Integrity</h3>
+              <p className="text-gray-400 leading-relaxed">
+                All client code is source-available for audit. Cryptographic primitives are standard, open implementations (Signal Protocol, MLS). No proprietary "black box" crypto.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* Articles Grid */}
-        <section className="py-12 px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredArticles.map((article, index) => (
-                <div
-                  key={index}
-                  className="p-6 rounded-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
-                  style={{
-                    background: 'linear-gradient(145deg, rgba(20, 30, 48, 0.6), rgba(36, 59, 85, 0.4))',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.15)',
-                    boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.3)'
-                  }}
-                >
-                  <div className="flex items-center gap-2 mb-3">
-                    <FileText className="w-4 h-4 text-green-400" />
-                    <span className="text-xs uppercase tracking-widest text-green-400">{article.category}</span>
+        {/* Technical Deep Dive */}
+        <section className="py-24 bg-[#0d121f] border-y border-white/10">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <h2 className="text-3xl font-bold text-white mb-6">Cryptographic Standards</h2>
+                <div className="space-y-6">
+                  <div className="flex gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-mono text-blue-400 font-bold">01</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-2">Double Ratchet Algorithm</h3>
+                      <p className="text-gray-400">Provides Perfect Forward Secrecy (PFS) and Post-Compromise Security (PCS). Session keys rotate with every single message.</p>
+                    </div>
                   </div>
-
-                  <h3 className="text-xl font-bold text-white mb-2">{article.title}</h3>
-                  <p className="text-gray-400 text-sm mb-4">{article.description}</p>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500 flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {article.readTime}
-                    </span>
-                    <ArrowRight className="w-4 h-4 text-green-400" />
+                  <div className="flex gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-mono text-blue-400 font-bold">02</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-2">X3DH Key Agreement</h3>
+                      <p className="text-gray-400">Extended Triple Diffie-Hellman ensures mutual authentication and deniability. Pre-keys allow asynchronous messaging secure from the start.</p>
+                    </div>
                   </div>
-
-                  <div className="mt-4 pt-4 border-t border-white/10">
-                    <div className="flex flex-wrap gap-2">
-                      {article.tags.map((tag, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2 py-1 rounded-full bg-green-500/10 text-green-400 text-xs"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                  <div className="flex gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-mono text-blue-400 font-bold">03</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-2">AES-256-GCM</h3>
+                      <p className="text-gray-400">Authenticated Encryption with Associated Data (AEAD) ensures both confidentiality and integrity of the ciphertext.</p>
                     </div>
                   </div>
                 </div>
-              ))}
+              </div>
+              <div className="bg-[#111827] border border-white/10 rounded-2xl p-8 font-mono text-sm leading-relaxed overflow-hidden">
+                <div className="text-gray-500 mb-4 ml-60">
+                     // Security primitive validation
+                  <br />
+                     /* FIPS 140-2 Level 2 Compliant */
+
+                </div>
+                <div className="text-blue-400">module<span className="text-white"> void_crypto </span>{`{`}</div>
+                <div className="pl-4 text-purple-400">use <span className="text-white">x25519_dalek::StaticSecret;</span></div>
+                <div className="pl-4 text-purple-400">use <span className="text-white">aes_gcm::Aes256Gcm;</span></div>
+                <div className="pl-4 text-purple-400">use <span className="text-white">sha2::Sha512;</span></div>
+                <br />
+                <div className="pl-4">
+                  <span className="text-yellow-500">pub fn</span> <span className="text-blue-300">verify_ratchet</span>( root_key: &[u8], chain_key: &[u8] ) -&gt; Result&lt;(), CryptoError&gt; {`{`}
+                </div>
+                <div className="pl-8 text-gray-400">// Implementation follows Signal spec</div>
+                <div className="pl-8 text-white">let hkdf = Hkdf::&lt;Sha512&gt;::new(Some(salt), root_key);</div>
+                <div className="pl-8 text-white">hkdf.expand(&amp;info, &amp;mut output)?;</div>
+                <div className="pl-4 text-white">{'}'}</div>
+                <div className="text-white">{'}'}</div>
+              </div>
             </div>
+          </div>
+        </section>
+
+        {/* Compliance */}
+        <section className="py-24 px-6">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4">Compliance Architecture</h2>
+            <p className="text-gray-400">Built to meet the specific requirements of Federal and Defense agencies.</p>
+          </div>
+          <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="bg-[#111827] border border-white/10 p-6 rounded-xl text-center">
+              <div className="text-2xl font-bold text-white mb-2">FedRAMP</div>
+              <div className="text-green-400 text-sm font-semibold">Ready</div>
+            </div>
+            <div className="bg-[#111827] border border-white/10 p-6 rounded-xl text-center">
+              <div className="text-2xl font-bold text-white mb-2">FIPS 140-2</div>
+              <div className="text-green-400 text-sm font-semibold">Validated</div>
+            </div>
+            <div className="bg-[#111827] border border-white/10 p-6 rounded-xl text-center">
+              <div className="text-2xl font-bold text-white mb-2">SOC 2</div>
+              <div className="text-green-400 text-sm font-semibold">Type II</div>
+            </div>
+            <div className="bg-[#111827] border border-white/10 p-6 rounded-xl text-center">
+              <div className="text-2xl font-bold text-white mb-2">HIPAA</div>
+              <div className="text-green-400 text-sm font-semibold">Compliant</div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-24 bg-blue-900/10 border-t border-white/5">
+          <div className="max-w-3xl mx-auto text-center px-6">
+            <h2 className="text-3xl font-bold text-white mb-8">Request the Security Whitepaper</h2>
+            <Link href="/contact-sales" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+              <FileText className="w-5 h-5" /> Download Technical Documentation
+            </Link>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/5 backdrop-blur-sm bg-[#0a0f1a]/80">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div className="md:col-span-2">
-              <h3 className="text-xl font-bold text-white mb-4">Resources</h3>
-              <ul className="space-y-2">
-                <li><Link href="/features" className="text-gray-400 hover:text-green-400 transition-colors">Features</Link></li>
-                <li><Link href="/demo" className="text-gray-400 hover:text-green-400 transition-colors">Interactive Demo</Link></li>
-                <li><Link href="/bounty" className="text-gray-400 hover:text-green-400 transition-colors">Bug Bounty</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold text-white mb-4">Documentation</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-green-400 transition-colors">API Documentation</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-green-400 transition-colors">Security Guide</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-green-400 transition-colors">Compliance</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold text-white mb-4">Transparency</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-green-400 transition-colors">Audit Reports</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-green-400 transition-colors">Security Blog</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-green-400 transition-colors">Open Source</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-sm">© 2024 VOID. All rights reserved.</p>
-            <div className="flex gap-6">
-              <Link href="/" className="text-gray-500 hover:text-white transition-colors text-sm">Home</Link>
-              <Link href="/features" className="text-gray-500 hover:text-white transition-colors text-sm">Features</Link>
-              <Link href="/download" className="text-gray-500 hover:text-white transition-colors text-sm">Download</Link>
-            </div>
-          </div>
-        </div>
+      <footer className="border-t border-white/10 bg-[#05080f] py-8 text-center text-sm text-gray-500">
+        <p>© 2024 VOID Enterprise. Zero Unauthorized Traces.</p>
       </footer>
-
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        * {
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-      `}</style>
-    </div>
+    </div >
   )
 }

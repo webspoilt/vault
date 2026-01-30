@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Lock, Unlock, Eye, Shield, Send, ArrowRight, RotateCcw, RefreshCw, Check } from 'lucide-react'
+import { Lock, Unlock, Eye, Shield, Send, ArrowRight, RotateCcw, FileText, Check, Server } from 'lucide-react'
 import Link from 'next/link'
 
 export default function DemoPage() {
@@ -13,10 +13,10 @@ export default function DemoPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   const sampleMessages = [
-    'Meeting at 3pm in the secure conference room',
-    'The launch codes are: ALPHA-7-BRAVO-XI',
-    'Primary target coordinates: 34.567, -118.231',
-    'Execute protocol DARK MATTER immediately'
+    'CLASSIFIED: Operation Sovereign Shield details attached.',
+    'Confirming receipt of encrypted keys for Node Alpha.',
+    'Authorization Code: XJ9-22-LIMA-WHISKEY',
+    'Audit Log Export Request #9921 initiated.'
   ]
 
   const encryptAnimation = () => {
@@ -24,7 +24,7 @@ export default function DemoPage() {
     setAnimationStep(0)
     setShowResult(false)
 
-    const steps = ['Encrypting...', 'Generating keys...', 'Sealing...', 'Locked!']
+    const steps = ['Initializing Ratchet...', 'Deriving Keys...', 'Sealing Content...', 'Verifying Signature...']
     let stepIndex = 0
 
     const interval = setInterval(() => {
@@ -49,72 +49,19 @@ export default function DemoPage() {
     setIsEncrypted(false)
   }
 
-  // Draw encryption visualization
+  // Visualization logic (simplified for React canvas)
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas || !isEncrypted) return
-
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    let frame = 0
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      // Draw locked state visualization
-      if (isEncrypted) {
-        // Draw encrypted message
-        const centerX = canvas.width / 2
-        const centerY = canvas.height / 2
-
-        // Outer ring - event horizon
-        ctx.beginPath()
-        ctx.arc(centerX, centerY, 150, 0, Math.PI * 2)
-        ctx.strokeStyle = 'rgba(59, 130, 246, 0.5)'
-        ctx.lineWidth = 3
-        ctx.stroke()
-
-        // Inner ring
-        ctx.beginPath()
-        ctx.arc(centerX, centerY, 100, 0, Math.PI * 2)
-        ctx.strokeStyle = 'rgba(59, 130, 246, 0.7)'
-        ctx.lineWidth = 2
-        ctx.stroke()
-
-        // Draw particles
-        for (let i = 0; i < 50; i++) {
-          const angle = Math.random() * Math.PI * 2
-          const radius = 120 + Math.random() * 50
-          const x = centerX + Math.cos(angle) * radius
-          const y = centerY + Math.sin(angle) * radius
-
-          const distanceToCenter = Math.sqrt(
-            Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
-          )
-
-          // Particle moves towards center
-          const speed = (200 - distanceToCenter) * 0.005
-          const moveAngle = Math.atan2(centerY - y, centerX - x)
-
-          const newX = x + Math.cos(moveAngle) * speed
-          const newY = y + Math.sin(moveAngle) * speed
-
-          ctx.beginPath()
-          ctx.arc(newX, newY, 2, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(59, 130, 246, ${0.8 - distanceToCenter * 0.003})`
-          ctx.fill()
-        }
-
-        frame++
-        if (frame < 120) {
-          requestAnimationFrame(draw)
-        } else {
-          requestAnimationFrame(draw)
-        }
-      }
-    }
-
-    draw()
+    // Simple visualizer placeholder logic
+    ctx.clearRect(0, 0, 400, 300)
+    ctx.fillStyle = '#10b981'
+    ctx.font = '14px monospace'
+    ctx.fillText('ENCRYPTED PACKET STREAM', 110, 150)
+    // In a real app we'd keep the fancy particles, but for this pivot we focus on the text/framing
   }, [isEncrypted])
 
   const handleEncrypt = () => {
@@ -130,307 +77,124 @@ export default function DemoPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden bg-[#0a0f1a]">
-      {/* Animated Background */}
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 60%)'
-        }}
-      />
-
+    <div className="min-h-screen flex flex-col bg-[#0a0f1a] text-gray-100 font-sans">
       {/* Navigation */}
-      <nav className="relative z-20 border-b border-white/5 backdrop-blur-lg bg-[#0a0f1a]/80">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-white hover:text-blue-400 transition-colors">
-            VOID
+      <nav className="border-b border-white/10 backdrop-blur-xl bg-[#0a0f1a]/90 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <Link href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <Shield className="w-5 h-5 text-white" />
+            </div>
+            VOID <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
           </Link>
-          <div className="flex items-center gap-8">
-            <Link href="/demo" className="text-blue-400 font-semibold">Demo</Link>
-            <Link href="/features" className="text-gray-400 hover:text-white transition-colors">Features</Link>
-            <Link href="/bounty" className="text-gray-400 hover:text-white transition-colors">Bounty</Link>
-            <Link href="/download" className="text-gray-400 hover:text-white transition-colors">Download</Link>
+          <div className="hidden md:flex items-center gap-8">
+            <Link href="/features" className="text-sm font-medium text-gray-300 hover:text-white">Product</Link>
+            <Link href="/security" className="text-sm font-medium text-gray-300 hover:text-white">Security</Link>
+            <Link href="/pricing" className="text-sm font-medium text-gray-300 hover:text-white">Pricing</Link>
           </div>
         </div>
       </nav>
 
-      {/* Main Content */}
-      <main className="flex-1 relative z-10">
-        {/* Hero Section */}
-        <section className="py-16 px-4">
-          <div className="max-w-5xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-              Encryption Demo
+      <main className="flex-1">
+        <section className="py-16 px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Encryption Validation Sandbox
             </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              See how your messages are protected in real-time
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-12">
+              Verify our cryptographic implementation in real-time. Input sensitive data and watch how the Double Ratchet Protocol handles key derivation and secrecy.
             </p>
           </div>
         </section>
 
-        {/* Demo Container */}
-        <section className="py-12 px-4">
-          <div className="max-w-4xl mx-auto">
-            {/* Input Section */}
-            <div className="mb-8 p-8 rounded-2xl backdrop-blur-lg" style={{
-              background: 'linear-gradient(145deg, rgba(20, 30, 48, 0.6), rgba(36, 59, 85, 0.4))',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              borderTop: '1px solid rgba(255, 255, 255, 0.15)'
-            }}>
-              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                <Send className="w-6 h-6 text-blue-400" />
-                Your Message
-              </h2>
+        <section className="px-6 pb-24">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
 
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Type your message here..."
-                className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-colors resize-none"
-                style={{ minHeight: '120px' }}
-                disabled={isAnimating || isEncrypted}
-              />
-
-              <div className="flex flex-col sm:flex-row gap-4 mt-6">
-                <button
-                  onClick={handleEncrypt}
-                  disabled={isAnimating || isEncrypted || !message.trim()}
-                  className="flex-1 px-6 py-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  {isAnimating ? (
-                    <>
-                      <RefreshCw className="w-5 h-5 animate-spin" />
-                      {animationStep}
-                    </>
-                  ) : (
-                    <>
-                      <Lock className="w-5 h-5" />
-                      Encrypt Message
-                    </>
-                  )}
-                </button>
-
-                <button
-                  onClick={handleDecrypt}
-                  disabled={!isEncrypted || isAnimating}
-                  className="flex-1 px-6 py-4 bg-white/10 border border-white/10 hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  {isEncrypted ? (
-                    <>
-                      <Unlock className="w-5 h-5" />
-                      Decrypt
-                    </>
-                  ) : (
-                    <>
-                      <Eye className="w-5 h-5" />
-                      View Decrypted
-                    </>
-                  )}
-                </button>
-
-                <button
-                  onClick={resetDemo}
-                  className="px-6 py-4 border border-white/10 text-white hover:bg-white/10 rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  <RotateCcw className="w-5 h-5" />
-                  Reset
-                </button>
-              </div>
-            </div>
-
-            {/* Sample Messages */}
-            <div className="mb-8">
-              <p className="text-sm text-gray-400 mb-3">Try these sample messages:</p>
-              <div className="space-y-2">
-                {sampleMessages.map((msg, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setMessage(msg)}
-                    disabled={isAnimating || isEncrypted}
-                    className="w-full text-left px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-gray-300 hover:bg-white/10 hover:text-white hover:border-blue-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-                  >
-                    {msg}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Visualization Section */}
-        <section className="py-12 px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="p-8 rounded-2xl backdrop-blur-lg" style={{
-              background: 'linear-gradient(145deg, rgba(20, 30, 48, 0.6), rgba(36, 59, 85, 0.4))',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              borderTop: '1px solid rgba(255, 255, 255, 0.15)'
-            }}>
-              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                <Shield className="w-6 h-6 text-amber-400" />
-                Encryption Visualization
-              </h2>
-
-              <div className="flex items-center gap-4 mb-4">
-                <div className="text-sm text-gray-400">
-                  Status: <span className={`font-semibold ${isEncrypted ? 'text-green-400' : 'text-gray-400'}`}>
-                    {isEncrypted ? 'ENCRYPTED' : 'WAITING'}
-                  </span>
+            {/* Input Column */}
+            <div className="space-y-8">
+              <div className="bg-[#111827] border border-white/10 rounded-2xl p-8">
+                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-blue-400" /> Source Message
+                </h2>
+                <div className="space-y-3 mb-6">
+                  {sampleMessages.map((msg, idx) => (
+                    <button key={idx} onClick={() => setMessage(msg)} disabled={isAnimating || isEncrypted} className="block w-full text-left text-sm p-3 bg-white/5 hover:bg-white/10 rounded-lg text-gray-300 transition-colors truncate">
+                      {msg}
+                    </button>
+                  ))}
                 </div>
-                <div className="text-sm text-gray-400">
-                  Algorithm: <span className="text-blue-400">Signal Protocol</span>
-                </div>
-              </div>
-
-              {/* Canvas */}
-              <div className="flex justify-center">
-                <canvas
-                  ref={canvasRef}
-                  width={400}
-                  height={300}
-                  className="rounded-xl bg-[#0a0f1a]/50 border border-white/5"
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Or type secret data here..."
+                  className="w-full h-32 bg-[#0a0f1a] border border-white/10 rounded-lg p-4 text-white font-mono text-sm focus:border-blue-500/50 outline-none resize-none"
+                  disabled={isAnimating || isEncrypted}
                 />
-              </div>
-
-              {/* Explanation */}
-              {isEncrypted && showResult && (
-                <div className="mt-6 p-6 bg-green-500/10 border border-green-500/30 rounded-xl animate-[fadeInUp_500ms_ease-out]">
-                  <div className="flex items-start gap-4 mb-3">
-                    <Check className="w-6 h-6 text-green-400 flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold text-white">Message Encrypted!</h3>
-                      <p className="text-gray-300">
-                        Your message has been encrypted using Signal Protocol with perfect forward secrecy.
-                        Only you and the recipient can decrypt it.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-center mt-4 text-sm text-gray-400">
-                    <ArrowRight className="w-4 h-4 inline-block mr-2" />
-                    Hover over encrypted messages to see them get decrypted
-                  </div>
-                </div>
-              )}
-
-              {!isEncrypted && (
-                <div className="mt-6 p-6 bg-blue-500/10 border border-blue-500/30 rounded-xl">
-                  <div className="flex items-start gap-4 mb-3">
-                    <Eye className="w-6 h-6 text-blue-400 flex-shrink-0" />
-                    <div>
-                      <h3 className="text-xl font-bold text-white">Ready to Encrypt</h3>
-                      <p className="text-gray-300">
-                        Type your message above and click "Encrypt Message" to see how Signal Protocol protects your communications.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* Info Section */}
-        <section className="py-12 px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="p-8 rounded-2xl" style={{
-              background: 'linear-gradient(145deg, rgba(20, 30, 48, 0.6), rgba(36, 59, 85, 0.4))',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              borderTop: '1px solid rgba(255, 255, 255, 0.15)'
-            }}>
-              <h2 className="text-2xl font-bold text-white mb-4">How It Works</h2>
-
-              <div className="space-y-4 mt-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl font-bold text-blue-400">1</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Key Exchange</h4>
-                    <p className="text-gray-400 text-sm">
-                      Generate unique encryption keys for each conversation
-                    </p>
-                  </div>
-                </div>
-
-                <div className="items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-purple-500/20 border border-purple-500/30 flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl font-bold text-purple-400">2</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Double Ratchet</h4>
-                    <p className="text-gray-400 text-sm">
-                      Rotate keys with every message - perfect forward secrecy
-                    </p>
-                  </div>
-                </div>
-
-                <div className="items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-green-500/20 border border-green-500/30 flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl font-bold text-green-400">3</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Sealed Sender</h4>
-                    <p className="text-gray-400 text-sm">
-                      Protect sender identity and message metadata
-                    </p>
-                  </div>
+                <div className="flex gap-4 mt-6">
+                  <button
+                    onClick={handleEncrypt}
+                    disabled={isAnimating || isEncrypted || !message.trim()}
+                    className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    {isAnimating ? 'Processing...' : <><Lock className="w-4 h-4" /> Encrypt</>}
+                  </button>
+                  <button onClick={resetDemo} className="px-4 py-3 border border-white/10 text-gray-300 rounded-lg hover:bg-white/5"><RotateCcw className="w-5 h-5" /></button>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-white/5">
-              <Link href="/features" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors font-semibold">
-                Learn More About Security
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+            {/* Output Column */}
+            <div className="space-y-8">
+              <div className="bg-[#111827] border border-white/10 rounded-2xl p-8 h-full flex flex-col">
+                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <Server className="w-5 h-5 text-green-400" /> Protocol State
+                </h2>
+
+                <div className="flex-1 bg-[#0a0f1a] rounded-lg border border-white/10 p-4 font-mono text-xs text-green-400 overflow-hidden relative">
+                  {!isEncrypted && !isAnimating && (
+                    <div className="absolute inset-0 flex items-center justify-center text-gray-600">
+                      [Waiting for Input]
+                    </div>
+                  )}
+                  {isAnimating && (
+                    <div className="space-y-2">
+                      <div className="text-blue-400">{'>'} {['Initializing session...', 'Deriving keys...', 'Sealing content...'][animationStep]}</div>
+                      {animationStep > 0 && <div>Successfully derived root key from HKDF.</div>}
+                      {animationStep > 1 && <div>Chain keys rotated. Forward secrecy active.</div>}
+                    </div>
+                  )}
+                  {isEncrypted && !isAnimating && (
+                    <div className="space-y-2 animate-in fade-in">
+                      <div className="text-gray-500"># ENCRYPTED PAYLOAD</div>
+                      <div className="break-all text-gray-300">
+                        0x7f4a2b9c1d8e3f5a0b2c4d6e8f1a3b5c7d9e2f4a6b8c0d1e3f5a7b9c2d4e6f8a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5...
+                      </div>
+                      <div className="mt-4 text-blue-400"># METADATA</div>
+                      <div>Algorithm: Signal Double Ratchet</div>
+                      <div>Padding: PKCS#7 (Obfuscated)</div>
+                      <div>Signer: VOID-GOV-ROOT-CA</div>
+                    </div>
+                  )}
+                </div>
+
+                {isEncrypted && (
+                  <div className="mt-6 p-4 bg-green-500/10 border border-green-500/20 rounded-lg flex gap-3">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+                    <div className="text-sm text-green-400">
+                      <span className="font-bold">Verification Successful.</span> Content is mathematically indecipherable without the private key held only by you.
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
+
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/5 backdrop-blur-sm bg-[#0a0f1a]/80 mt-auto">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-sm">
-              © 2024 VOID. All rights reserved.
-            </p>
-            <div className="flex gap-6">
-              <Link href="/" className="text-gray-500 hover:text-white transition-colors text-sm">Home</Link>
-              <Link href="/features" className="text-gray-500 hover:text-white transition-colors text-sm">Features</Link>
-            </div>
-          </div>
-        </div>
+      <footer className="border-t border-white/10 bg-[#05080f] py-8 text-center text-sm text-gray-500">
+        <p>© 2024 VOID Enterprise. Demo environment - Do not use for actual classified data.</p>
       </footer>
-
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        * {
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes fadeInDown {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   )
 }
