@@ -232,6 +232,164 @@ export default function DownloadPage() {
           </div>
         </section>
 
+        {/* Sponsored Partner Listings */}
+        <section className="py-20 px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 mb-4">
+                <Star className="w-4 h-4 text-emerald-400 fill-emerald-400/20" />
+                <span className="text-sm font-medium tracking-widest text-emerald-400 uppercase">Trusted Partners</span>
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Recommended by Security Experts
+              </h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">
+                Enhance your VOID experience with these trusted security and privacy tools.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* CloudStorage Pro */}
+              <div
+                className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(16, 185, 129, 0.08), rgba(6, 95, 70, 0.15))',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(16, 185, 129, 0.2)',
+                }}
+              >
+                <div className="absolute top-3 right-3 px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium">
+                  Sponsored
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border border-emerald-500/20 flex items-center justify-center mb-4">
+                  <Globe className="w-6 h-6 text-emerald-400" />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">CloudStorage Pro</h3>
+                <p className="text-sm text-gray-400 mb-4">End-to-end encrypted cloud storage for your VOID backups. Zero-knowledge architecture.</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-emerald-400 font-semibold">Free 10GB</span>
+                  <ArrowRight className="w-5 h-5 text-emerald-400 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+
+              {/* SecureVault */}
+              <div
+                className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(59, 130, 246, 0.08), rgba(30, 58, 138, 0.15))',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(59, 130, 246, 0.2)',
+                }}
+              >
+                <div className="absolute top-3 right-3 px-2 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">
+                  Sponsored
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/20 flex items-center justify-center mb-4">
+                  <Shield className="w-6 h-6 text-blue-400" />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">SecureVault</h3>
+                <p className="text-sm text-gray-400 mb-4">Password manager with military-grade encryption. Seamlessly integrates with VOID.</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-blue-400 font-semibold">30-day trial</span>
+                  <ArrowRight className="w-5 h-5 text-blue-400 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+
+              {/* DataGuard VPN */}
+              <div
+                className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(168, 85, 247, 0.08), rgba(91, 33, 182, 0.15))',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(168, 85, 247, 0.2)',
+                }}
+              >
+                <div className="absolute top-3 right-3 px-2 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium">
+                  Sponsored
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/20 flex items-center justify-center mb-4">
+                  <Zap className="w-6 h-6 text-purple-400" />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">DataGuard VPN</h3>
+                <p className="text-sm text-gray-400 mb-4">No-log VPN with WireGuard protocol. Private browsing for ultimate anonymity.</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-purple-400 font-semibold">50% off</span>
+                  <ArrowRight className="w-5 h-5 text-purple-400 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+
+              {/* CryptoAuth */}
+              <div
+                className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(251, 191, 36, 0.08), rgba(180, 83, 9, 0.15))',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(251, 191, 36, 0.2)',
+                }}
+              >
+                <div className="absolute top-3 right-3 px-2 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-medium">
+                  Sponsored
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/20 flex items-center justify-center mb-4">
+                  <Star className="w-6 h-6 text-amber-400" />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">CryptoAuth</h3>
+                <p className="text-sm text-gray-400 mb-4">Hardware security keys for 2FA. FIDO2 certified for maximum protection.</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-amber-400 font-semibold">From $29</span>
+                  <ArrowRight className="w-5 h-5 text-amber-400 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+
+              {/* PrivacyMail */}
+              <div
+                className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(236, 72, 153, 0.08), rgba(157, 23, 77, 0.15))',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(236, 72, 153, 0.2)',
+                }}
+              >
+                <div className="absolute top-3 right-3 px-2 py-1 rounded-full bg-pink-500/20 text-pink-400 text-xs font-medium">
+                  Sponsored
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500/20 to-pink-600/10 border border-pink-500/20 flex items-center justify-center mb-4">
+                  <Monitor className="w-6 h-6 text-pink-400" />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">PrivacyMail</h3>
+                <p className="text-sm text-gray-400 mb-4">Encrypted email service with zero tracking. Anonymous aliases included.</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-pink-400 font-semibold">Free tier</span>
+                  <ArrowRight className="w-5 h-5 text-pink-400 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+
+              {/* SecureDNS */}
+              <div
+                className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(20, 184, 166, 0.08), rgba(13, 148, 136, 0.15))',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(20, 184, 166, 0.2)',
+                }}
+              >
+                <div className="absolute top-3 right-3 px-2 py-1 rounded-full bg-teal-500/20 text-teal-400 text-xs font-medium">
+                  Sponsored
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500/20 to-teal-600/10 border border-teal-500/20 flex items-center justify-center mb-4">
+                  <Download className="w-6 h-6 text-teal-400" />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">SecureDNS</h3>
+                <p className="text-sm text-gray-400 mb-4">Private DNS resolver with malware blocking. Encrypted DNS over HTTPS.</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-teal-400 font-semibold">Always free</span>
+                  <ArrowRight className="w-5 h-5 text-teal-400 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="py-20 px-4">
           <div className="max-w-3xl mx-auto text-center">
