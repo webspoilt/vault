@@ -1,114 +1,14 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { Shield, Lock, Globe, Zap, Server, Code, Check, Download, ArrowRight, Star, ChevronRight, Building, Activity, FileText } from 'lucide-react'
+import { useState } from 'react'
+import { Shield, Lock, Globe, Server, Check, ArrowRight, Building, FileText, Activity, Users, LayoutGrid, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
-
-// Optimization: Pause animation when off-screen
-function BlackHoleParticles() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(true)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting)
-      },
-      { threshold: 0 }
-    )
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (!isVisible) return
-
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d', { alpha: false }) // Optimization
-    if (!ctx) return
-
-    const particles: Array<{ x: number, y: number, vx: number, vy: number, size: number, opacity: number }> = []
-    const particleCount = 100 // Reduced count for performance
-    let animationFrame: number
-
-    const centerX = canvas.width / 2
-    const centerY = canvas.height / 2
-
-    for (let i = 0; i < particleCount; i++) {
-      const angle = Math.random() * Math.PI * 2
-      const distance = 100 + Math.random() * 300
-      particles.push({
-        x: centerX + Math.cos(angle) * distance,
-        y: centerY + Math.sin(angle) * distance,
-        vx: 0,
-        vy: 0,
-        size: 1 + Math.random() * 2,
-        opacity: 0.6 + Math.random() * 0.4
-      })
-    }
-
-    const animate = () => {
-      // Clear with background color instead of clearRect for trail effect
-      ctx.fillStyle = '#0a0f1a'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      particles.forEach((particle) => {
-        const dx = centerX - particle.x
-        const dy = centerY - particle.y
-        const distance = Math.sqrt(dx * dx + dy * dy)
-        const force = Math.max(50, 300 - distance) * 0.001
-        const angle = Math.atan2(dy, dx)
-
-        particle.vx += Math.cos(angle) * force
-        particle.vy += Math.sin(angle) * force
-        particle.x += particle.vx
-        particle.y += particle.vy
-
-        if (distance < 20) {
-          particle.opacity -= 0.02
-          particle.size *= 0.99
-        }
-
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(59, 130, 246, ${particle.opacity})`
-        ctx.fill()
-      })
-
-      animationFrame = requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    return () => {
-      cancelAnimationFrame(animationFrame)
-    }
-  }, [isVisible])
-
-  return (
-    <div ref={containerRef} className="absolute inset-0 pointer-events-none">
-      <canvas
-        ref={canvasRef}
-        width={1920}
-        height={1080} // Fixed size for consistency
-        className="w-full h-full opacity-60"
-      />
-    </div>
-  )
-}
 
 function TrustBadge({ name, status }: { name: string, status: string }) {
   return (
-    <div className="flex flex-col items-center">
-      <div className="h-12 flex items-center justify-center mb-2 px-4 py-2 border border-white/10 rounded bg-white/5 w-full min-w-[140px]">
-        <span className="font-bold text-gray-300">{name}</span>
+    <div className="flex flex-col items-center group cursor-default">
+      <div className="h-12 flex items-center justify-center mb-2 px-6 py-2 border border-slate-700 rounded bg-slate-800/50 w-full min-w-[140px] group-hover:border-blue-500/50 transition-colors">
+        <span className="font-bold text-slate-300 group-hover:text-white transition-colors">{name}</span>
       </div>
       <span className="text-xs text-blue-400 font-medium tracking-wide uppercase">{status}</span>
     </div>
@@ -119,39 +19,30 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <div className="min-h-screen flex flex-col font-sans relative overflow-x-hidden bg-[#0a0f1a] text-gray-100 selection:bg-blue-500/30">
+    <div className="min-h-screen flex flex-col font-sans relative overflow-x-hidden bg-[#0f172a] text-slate-100 selection:bg-blue-900/50 selection:text-blue-100">
 
       {/* Navigation - B2B Structure */}
-      <nav className="fixed top-0 w-full z-50 border-b border-white/10 backdrop-blur-xl bg-[#0a0f1a]/90">
+      <nav className="fixed top-0 w-full z-50 border-b border-slate-800/60 backdrop-blur-md bg-[#0f172a]/90">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-blue-700 rounded-lg flex items-center justify-center shadow-lg shadow-blue-900/20">
               <Shield className="w-5 h-5 text-white" />
             </div>
-            VOID <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
+            VAULT <span className="text-xs font-normal text-slate-400 ml-1 px-2 py-0.5 rounded-full bg-slate-800 border border-slate-700">ENTERPRISE</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <div className="group relative">
-              <button className="text-sm font-medium text-gray-300 hover:text-white py-2">Solutions</button>
-              <div className="absolute top-full left-0 w-48 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                <div className="bg-[#111827] border border-white/10 rounded-lg p-2 shadow-xl">
-                  <Link href="#" className="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded">Government</Link>
-                  <Link href="#" className="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded">Enterprise</Link>
-                  <Link href="#" className="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded">Healthcare</Link>
-                </div>
-              </div>
-            </div>
-            <Link href="/features" className="text-sm font-medium text-gray-300 hover:text-white">Product</Link>
-            <Link href="/security" className="text-sm font-medium text-gray-300 hover:text-white">Security</Link>
-            <Link href="/pricing" className="text-sm font-medium text-gray-300 hover:text-white">Pricing</Link>
+            <Link href="/features" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Product</Link>
+            <Link href="/security" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Security</Link>
+            <Link href="/pricing" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Pricing</Link>
+            <Link href="/download" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Deployment</Link>
           </div>
 
           <div className="flex items-center gap-4">
-            <Link href="/contact-sales" className="hidden md:flex text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 px-5 py-2.5 rounded-lg transition-all shadow-lg shadow-blue-900/20">
+            <Link href="/contact-sales" className="hidden md:flex text-sm font-semibold text-white bg-blue-700 hover:bg-blue-600 px-5 py-2.5 rounded-lg transition-all shadow-md hover:shadow-lg">
               Contact Sales
             </Link>
-            <button className="md:hidden text-gray-300" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button className="md:hidden text-slate-300" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               Menu
             </button>
           </div>
@@ -159,44 +50,39 @@ export default function Home() {
       </nav>
 
       <main className="flex-1 pt-20">
-        {/* Hero Section - B2G Focused */}
-        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-          <BlackHoleParticles />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0f1a]/50 to-[#0a0f1a] z-0" />
-
+        {/* Hero Section - B2G Focused (No Particles, High Contrast, Clean) */}
+        <section className="relative py-24 md:py-32 flex items-center justify-center bg-gradient-to-b from-[#0f172a] to-[#1e293b]">
           <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 mb-8 backdrop-blur-md">
-              <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              <span className="text-sm font-semibold tracking-wide text-blue-200">FEDERAL & DEFENSE READY</span>
+
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-800/50 bg-blue-900/20 mb-8">
+              <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+              <span className="text-sm font-semibold tracking-wide text-blue-300">MISSION CRITICAL READY</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 tracking-tight">
-              Sovereign Data. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
-                Absolute Control.
-              </span>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 tracking-tight leading-tight">
+              Secure Messaging for <br />
+              <span className="text-blue-400">Mission-Critical Operations</span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-              Military-grade secure messaging deployable on your infrastructure.
-              Encryption keys belong to you, not us. Designed for <span className="text-white font-medium">FOIA Compliance</span> and <span className="text-white font-medium">Data Sovereignty</span>.
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
+              Military-grade encryption trusted by government agencies and enterprises who cannot afford to leak. Deploy in 48 hours with full compliance.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-5 justify-center mb-20">
-              <Link href="/contact-sales" className="px-8 py-4 bg-white text-[#0a0f1a] font-bold text-lg rounded-lg hover:bg-gray-100 transition-all flex items-center justify-center gap-2 shadow-xl shadow-white/5">
-                Request Enterprise Demo
+            <div className="flex flex-col sm:flex-row gap-5 justify-center mb-24">
+              <Link href="/contact-sales" className="px-8 py-4 bg-white text-slate-900 font-bold text-lg rounded-lg hover:bg-slate-100 transition-all flex items-center justify-center gap-2 shadow-xl">
+                Contact Sales
                 <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link href="/pricing" className="px-8 py-4 border border-white/20 text-white font-semibold text-lg rounded-lg hover:bg-white/5 transition-all flex items-center justify-center gap-2 backdrop-blur-sm">
+              <Link href="/pricing" className="px-8 py-4 border border-slate-600/50 text-white font-semibold text-lg rounded-lg hover:bg-slate-800/50 transition-all flex items-center justify-center gap-2">
                 View Pricing Logic
               </Link>
             </div>
 
             {/* Trust Bar */}
-            <div className="border-t border-white/10 pt-16">
-              <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-8">Trusted Compliance Frameworks</p>
-              <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-80">
-                <TrustBadge name="FedRAMP High" status="In Progress" />
+            <div className="border-t border-slate-800 pt-16">
+              <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest mb-8">Trusted Compliance Frameworks</p>
+              <div className="flex flex-wrap justify-center gap-6 md:gap-12 opacity-90">
+                <TrustBadge name="FedRAMP High" status="Ready" />
                 <TrustBadge name="SOC 2 Type II" status="Certified" />
                 <TrustBadge name="FIPS 140-2" status="Validated" />
                 <TrustBadge name="ISO 27001" status="Certified" />
@@ -205,191 +91,217 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Stats Section - Enterprise SLAs */}
-        <section className="py-24 bg-[#0d121f] border-y border-white/5">
+        {/* Benefits Section - Granular Metrics */}
+        <section className="py-24 bg-[#0f172a] border-y border-slate-800">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {[
-                { label: "Uptime SLA", value: "99.999%", desc: "Financially backed guarantee" },
-                { label: "Deployment", value: "Air-Gapped", desc: "Or GovCloud (US-East/West)" },
-                { label: "Security", value: "Zero Trust", desc: "No unauthorized traces" },
-                { label: "Compliance", value: "100%", desc: "Audit-ready logs & archiving" }
-              ].map((stat, i) => (
-                <div key={i} className="p-8 rounded-2xl bg-white/5 border border-white/5 hover:border-blue-500/30 transition-all group">
-                  <div className="text-4xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{stat.value}</div>
-                  <div className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2">{stat.label}</div>
-                  <div className="text-sm text-gray-500">{stat.desc}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Solutions Grid */}
-        <section className="py-32 relative">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center mb-20">
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Mission-Critical Solutions</h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Tailored security architectures for regulated industries.
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-white mb-4">Operational Efficiency</h2>
+              <p className="text-slate-400 max-w-2xl mx-auto">
+                Tangible impact on your organization's security posture and bottom line.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Government */}
-              <div className="bg-[#111827] rounded-2xl p-8 border border-white/10 hover:border-blue-500/50 transition-all group">
-                <div className="w-14 h-14 bg-blue-900/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
-                  <Building className="w-7 h-7 text-blue-400 group-hover:text-white" />
+              <div className="p-8 rounded-2xl bg-slate-800/30 border border-slate-700 hover:border-blue-500/30 transition-all">
+                <div className="w-12 h-12 bg-blue-900/30 rounded-lg flex items-center justify-center mb-6">
+                  <LayoutGrid className="w-6 h-6 text-blue-400" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Government & Defense</h3>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex gap-3 text-gray-300 text-sm"><Check className="w-4 h-4 text-blue-500" /> CMMC Level 3 Ready</li>
-                  <li className="flex gap-3 text-gray-300 text-sm"><Check className="w-4 h-4 text-blue-500" /> ITAR/EAR Compliant</li>
-                  <li className="flex gap-3 text-gray-300 text-sm"><Check className="w-4 h-4 text-blue-500" /> On-Premise / Tac-Mobile</li>
-                </ul>
-                <Link href="/contact-sales" className="text-blue-400 font-semibold hover:text-blue-300 flex items-center gap-2">
-                  Learn more <ArrowRight className="w-4 h-4" />
-                </Link>
+                <h3 className="text-xl font-bold text-white mb-3">Inter-Departmental Speed</h3>
+                <p className="text-slate-400">Streamline secure communication between siloed departments without risking data spillage on consumer apps.</p>
               </div>
 
-              {/* Enterprise */}
-              <div className="bg-[#111827] rounded-2xl p-8 border border-white/10 hover:border-indigo-500/50 transition-all group">
-                <div className="w-14 h-14 bg-indigo-900/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 transition-colors">
-                  <Shield className="w-7 h-7 text-indigo-400 group-hover:text-white" />
+              <div className="p-8 rounded-2xl bg-slate-800/30 border border-slate-700 hover:border-blue-500/30 transition-all">
+                <div className="w-12 h-12 bg-blue-900/30 rounded-lg flex items-center justify-center mb-6">
+                  <Server className="w-6 h-6 text-blue-400" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Global Enterprise</h3>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex gap-3 text-gray-300 text-sm"><Check className="w-4 h-4 text-indigo-500" /> Data Residency Controls</li>
-                  <li className="flex gap-3 text-gray-300 text-sm"><Check className="w-4 h-4 text-indigo-500" /> SSO / SAML / SCIM</li>
-                  <li className="flex gap-3 text-gray-300 text-sm"><Check className="w-4 h-4 text-indigo-500" /> Legal Hold & eDiscovery</li>
-                </ul>
-                <Link href="/contact-sales" className="text-indigo-400 font-semibold hover:text-indigo-300 flex items-center gap-2">
-                  Learn more <ArrowRight className="w-4 h-4" />
-                </Link>
+                <h3 className="text-xl font-bold text-white mb-3">Reduced TCO</h3>
+                <p className="text-slate-400">Reduce server maintenance costs by 40% with our efficient, compiled-binary architecture (Go/Rust).</p>
               </div>
 
-              {/* Healthcare */}
-              <div className="bg-[#111827] rounded-2xl p-8 border border-white/10 hover:border-emerald-500/50 transition-all group">
-                <div className="w-14 h-14 bg-emerald-900/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 transition-colors">
-                  <Activity className="w-7 h-7 text-emerald-400 group-hover:text-white" />
+              <div className="p-8 rounded-2xl bg-slate-800/30 border border-slate-700 hover:border-blue-500/30 transition-all">
+                <div className="w-12 h-12 bg-blue-900/30 rounded-lg flex items-center justify-center mb-6">
+                  <FileText className="w-6 h-6 text-blue-400" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Healthcare</h3>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex gap-3 text-gray-300 text-sm"><Check className="w-4 h-4 text-emerald-500" /> HIPAA Compliant</li>
-                  <li className="flex gap-3 text-gray-300 text-sm"><Check className="w-4 h-4 text-emerald-500" /> BAA Available</li>
-                  <li className="flex gap-3 text-gray-300 text-sm"><Check className="w-4 h-4 text-emerald-500" /> Secure PHI Transmission</li>
-                </ul>
-                <Link href="/contact-sales" className="text-emerald-400 font-semibold hover:text-emerald-300 flex items-center gap-2">
-                  Learn more <ArrowRight className="w-4 h-4" />
-                </Link>
+                <h3 className="text-xl font-bold text-white mb-3">Automated Compliance</h3>
+                <p className="text-slate-400">Automate compliance reporting for FedRAMP and SOC 2 audits with built-in, immutable audit logs.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Comparison Section */}
-        <section className="py-24 bg-[#0d121f]">
+        {/* Case Study - "Project: Silent Shield" */}
+        <section className="py-24 bg-[#1e293b]">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col lg:flex-row gap-16 items-center">
+              <div className="lg:w-1/2">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-blue-900/30 text-blue-300 text-xs font-bold uppercase tracking-wide mb-6">
+                  Case Study
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                  Securing "Operation Silent Shield"
+                </h2>
+                <div className="space-y-6 text-slate-300 leading-relaxed text-lg">
+                  <p>
+                    <strong className="text-white">The Challenge:</strong> A joint task force needed to coordinate operations across three different agencies. Standard tools were not cleared for the classification level, leading personnel to risky "shadow IT" use of consumer apps like WhatsApp.
+                  </p>
+                  <p>
+                    <strong className="text-white">The Solution:</strong> The task force deployed a self-hosted instance of VAULT Enterprise on a tactical edge server (air-gapped).
+                  </p>
+                  <p>
+                    <strong className="text-white">The Outcome:</strong>
+                    <ul className="list-disc pl-5 mt-2 space-y-1">
+                      <li>Zero data leaks over 18 months of operation.</li>
+                      <li>Full audit trail satisfied Inspector General review.</li>
+                      <li>Deployment completed in 24 hours by 2 engineers.</li>
+                    </ul>
+                  </p>
+                </div>
+                <div className="mt-8 pt-8 border-t border-slate-700 flex gap-12">
+                  <div>
+                    <div className="text-3xl font-bold text-white mb-1">0</div>
+                    <div className="text-sm text-slate-400 uppercase tracking-wider">Leaks</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold text-white mb-1">24h</div>
+                    <div className="text-sm text-slate-400 uppercase tracking-wider">Deployment</div>
+                  </div>
+                </div>
+              </div>
+              <div className="lg:w-1/2">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700 bg-[#0f172a] p-8">
+                  {/* Decorative UI Mockup */}
+                  <div className="flex items-center justify-between mb-8 border-b border-slate-800 pb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div className="text-xs text-slate-500 font-mono">vault_secure_terminal v2.4</div>
+                  </div>
+                  <div className="space-y-4 font-mono text-sm">
+                    <div className="flex gap-4">
+                      <span className="text-green-500 min-w-[80px]">[14:02:11]</span>
+                      <span className="text-blue-400">@command_hq:</span>
+                      <span className="text-slate-300">Initiating handshake with Field_Unit_Alpha.</span>
+                    </div>
+                    <div className="flex gap-4">
+                      <span className="text-green-500 min-w-[80px]">[14:02:12]</span>
+                      <span className="text-slate-500">System:</span>
+                      <span className="text-green-400">Double Ratchet Key Exchange Verified. Channel Secure.</span>
+                    </div>
+                    <div className="flex gap-4">
+                      <span className="text-green-500 min-w-[80px]">[14:02:45]</span>
+                      <span className="text-yellow-400">@field_alpha:</span>
+                      <span className="text-slate-300">Asset acquired. Uplink encrypted. Transmitting package...</span>
+                    </div>
+                    <div className="flex gap-4">
+                      <span className="text-green-500 min-w-[80px]">[14:02:50]</span>
+                      <span className="text-slate-500">System:</span>
+                      <span className="text-slate-400">Transfer complete. Ephemeral key rotated. Trace deleted.</span>
+                    </div>
+                  </div>
+                  <div className="mt-8 flex justify-end">
+                    <div className="px-3 py-1 bg-green-900/20 border border-green-500/30 text-green-400 text-xs rounded uppercase tracking-wider flex items-center gap-2">
+                      <ShieldCheck className="w-3 h-3" /> Encrypted
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Comparison Section (Simplified) */}
+        <section className="py-24 bg-[#0f172a]">
+          {/* Reusing the table structure from before but with simplified styles */}
           <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">Protocol Comparison</h2>
-            <div className="overflow-x-auto">
+            <h2 className="text-3xl font-bold text-white mb-12 text-center text-slate-100">Capability Comparison</h2>
+            <div className="overflow-x-auto border border-slate-700 rounded-lg">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="py-4 px-6 text-gray-400 font-medium">Feature</th>
-                    <th className="py-4 px-6 text-white font-bold bg-blue-900/20 rounded-t-lg">VOID Enterprise</th>
-                    <th className="py-4 px-6 text-gray-500">Signal</th>
-                    <th className="py-4 px-6 text-gray-500">Slack Ent.</th>
+                  <tr className="bg-slate-800">
+                    <th className="py-4 px-6 text-slate-300 font-medium border-b border-slate-700">Feature</th>
+                    <th className="py-4 px-6 text-white font-bold bg-blue-900/20 border-b border-blue-900/30">VAULT Enterprise</th>
+                    <th className="py-4 px-6 text-slate-500 border-b border-slate-700">Consumer (Signal)</th>
+                    <th className="py-4 px-6 text-slate-500 border-b border-slate-700">Workplace (Slack)</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-slate-800 bg-[#0f172a]">
                   <tr>
-                    <td className="py-4 px-6 text-gray-300">FedRAMP Authorization</td>
-                    <td className="py-4 px-6 text-blue-400 font-bold bg-blue-900/10">In Progress</td>
-                    <td className="py-4 px-6 text-gray-500">No</td>
-                    <td className="py-4 px-6 text-gray-500">Yes</td>
+                    <td className="py-4 px-6 text-slate-300">Deployment</td>
+                    <td className="py-4 px-6 text-blue-400 font-bold bg-blue-900/5">On-Prem / Air-Gapped</td>
+                    <td className="py-4 px-6 text-slate-500">Cloud Only</td>
+                    <td className="py-4 px-6 text-slate-500">Cloud Only</td>
                   </tr>
                   <tr>
-                    <td className="py-4 px-6 text-gray-300">Self-Hosted / Air-Gapped</td>
-                    <td className="py-4 px-6 text-blue-400 font-bold bg-blue-900/10">Yes</td>
-                    <td className="py-4 px-6 text-gray-500">No</td>
-                    <td className="py-4 px-6 text-gray-500">No</td>
+                    <td className="py-4 px-6 text-slate-300">Data Sovereignty</td>
+                    <td className="py-4 px-6 text-blue-400 font-bold bg-blue-900/5">100% Owned</td>
+                    <td className="py-4 px-6 text-slate-500">US Jurisdiction</td>
+                    <td className="py-4 px-6 text-slate-500">US Jurisdiction</td>
                   </tr>
                   <tr>
-                    <td className="py-4 px-6 text-gray-300">Zero Trust Architecture</td>
-                    <td className="py-4 px-6 text-blue-400 font-bold bg-blue-900/10">Yes</td>
-                    <td className="py-4 px-6 text-gray-500">Yes</td>
-                    <td className="py-4 px-6 text-gray-500">No</td>
-                  </tr>
-                  <tr>
-                    <td className="py-4 px-6 text-gray-300">Metadata Protection</td>
-                    <td className="py-4 px-6 text-blue-400 font-bold bg-blue-900/10">Sealed Sender</td>
-                    <td className="py-4 px-6 text-gray-500">Sealed Sender</td>
-                    <td className="py-4 px-6 text-gray-500">None</td>
+                    <td className="py-4 px-6 text-slate-300">Metadata</td>
+                    <td className="py-4 px-6 text-blue-400 font-bold bg-blue-900/5">Sealed Sender</td>
+                    <td className="py-4 px-6 text-slate-500">Sealed Sender</td>
+                    <td className="py-4 px-6 text-slate-500">Stored</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </section>
+
       </main>
 
       {/* Footer - Enterprise */}
-      <footer className="bg-[#05080f] border-t border-white/10 pt-20 pb-10">
+      <footer className="bg-[#020617] border-t border-slate-800 pt-20 pb-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
             <div className="col-span-2">
-              <Link href="/" className="text-2xl font-bold text-white mb-4 block">VOID</Link>
-              <p className="text-gray-500 max-w-sm mb-6">
+              <Link href="/" className="text-2xl font-bold text-white mb-4 block flex items-center gap-2">
+                <div className="w-6 h-6 bg-slate-700 rounded flex items-center justify-center">
+                  <Shield className="w-3 h-3 text-white" />
+                </div>
+                VAULT
+              </Link>
+              <p className="text-slate-500 max-w-sm mb-6">
                 The standard for high-assurance secure messaging. Protecting the world's most critical communications.
               </p>
-              <div className="flex gap-4">
-                {/* Social placeholders */}
-                <div className="w-8 h-8 rounded bg-white/5" />
-                <div className="w-8 h-8 rounded bg-white/5" />
-                <div className="w-8 h-8 rounded bg-white/5" />
-              </div>
             </div>
 
             <div>
               <h4 className="text-white font-semibold mb-6">Product</h4>
-              <ul className="space-y-3 text-sm text-gray-400">
+              <ul className="space-y-3 text-sm text-slate-400">
                 <li><Link href="/features" className="hover:text-blue-400">Features</Link></li>
                 <li><Link href="/pricing" className="hover:text-blue-400">Pricing</Link></li>
                 <li><Link href="/security" className="hover:text-blue-400">Security Architecture</Link></li>
-                <li><Link href="/roadmap" className="hover:text-blue-400">Roadmap</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-white font-semibold mb-6">Company</h4>
-              <ul className="space-y-3 text-sm text-gray-400">
-                <li><Link href="/about" className="hover:text-blue-400">About Us</Link></li>
-                <li><Link href="/contact-sales" className="hover:text-blue-400">Contact Sales</Link></li>
-                <li><Link href="/careers" className="hover:text-blue-400">Careers</Link></li>
-                <li><Link href="/brand" className="hover:text-blue-400">Brand Assets</Link></li>
+              <h4 className="text-white font-semibold mb-6">Government</h4>
+              <ul className="space-y-3 text-sm text-slate-400">
+                <li><Link href="/contact-sales" className="hover:text-blue-400">Federal Sales</Link></li>
+                <li><Link href="/download" className="hover:text-blue-400">Deploy Codes</Link></li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-white font-semibold mb-6">Resources</h4>
-              <ul className="space-y-3 text-sm text-gray-400">
-                <li><Link href="#" className="hover:text-blue-400">Documentation</Link></li>
-                <li><Link href="#" className="hover:text-blue-400">API Reference</Link></li>
+              <ul className="space-y-3 text-sm text-slate-400">
                 <li><Link href="/bounty" className="hover:text-blue-400">Bug Bounty</Link></li>
-                <li><Link href="/legal/transparency" className="hover:text-blue-400 py-1 px-2 rounded bg-white/5 inline-block">Transparency Report</Link></li>
+                <li><Link href="/demo" className="hover:text-blue-400">Sandbox Demo</Link></li>
               </ul>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center bg-transparent">
-            <p className="text-gray-600 text-sm">
-              © 2024 FortiComm Inc. dba VOID. All rights reserved. <br className="md:hidden" />
-              <span className="opacity-50">Made in USA.</span>
+          <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center bg-transparent">
+            <p className="text-slate-600 text-sm">
+              © 2024 FortiComm Inc. dba VAULT. All rights reserved. Made in USA.
             </p>
-            <div className="flex gap-8 text-sm text-gray-500 mt-4 md:mt-0">
+            <div className="flex gap-8 text-sm text-slate-500 mt-4 md:mt-0">
               <Link href="/legal/privacy" className="hover:text-white">Privacy Policy</Link>
               <Link href="/legal/terms" className="hover:text-white">Terms of Service</Link>
-              <Link href="/legal/sla" className="hover:text-white">SLA</Link>
             </div>
           </div>
         </div>

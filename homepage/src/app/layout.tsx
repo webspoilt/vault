@@ -10,10 +10,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "VOID - Sovereign Secure Messaging",
-  description: "Military-grade encryption for mission-critical operations. FedRAMP authorized (in progress), FIPS 140-2 validated. Deploy on-premise or in the cloud.",
+  title: 'VAULT - Verifiable Audit & Unified Ledger Technologies',
+  description: 'Military-grade secure messaging for Government and Enterprise. FIPS 140-2 Validated, FedRAMP Ready, Zero Unauthorized Traces.',
   keywords: ["secure messaging", "government communications", "FIPS 140-2", "FedRAMP", "on-premise", "zero trust"],
-  authors: [{ name: "VOID Enterprise" }],
+  authors: [{ name: "VAULT Enterprise" }],
   icons: {
     icon: "/favicon.ico",
   },
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} antialiased bg-[#0a0f1a] text-gray-100 font-sans`}
+        className={`${inter.variable} antialiased bg-[#0f172a] text-slate-100 font-sans`}
       >
         {children}
         <Toaster />

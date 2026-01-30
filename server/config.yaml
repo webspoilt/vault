@@ -1,4 +1,4 @@
-# 🔐 VOID Relay Server Configuration
+# 🔐 VAULT Relay Server Configuration
 
 # Server bind address
 bind_addr: ":8080"

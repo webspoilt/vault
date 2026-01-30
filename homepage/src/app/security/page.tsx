@@ -11,10 +11,10 @@ export default function SecurityPage() {
       <nav className="border-b border-white/10 backdrop-blur-xl bg-[#0a0f1a]/90 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="wVAULT-GOV-ROOT-CAblue-600 rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5 text-white" />
             </div>
-            VOID <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
+            VAULT <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <Link href="/features" className="text-sm font-medium text-gray-300 hover:text-white">Product</Link>
@@ -115,7 +115,7 @@ export default function SecurityPage() {
                      /* FIPS 140-2 Level 2 Compliant */
 
                 </div>
-                <div className="text-blue-400">module<span className="text-white"> void_crypto </span>{`{`}</div>
+                <div className="text-blue-400">module<span className="text-white"> vault_crypto </span>{`{`}</div>
                 <div className="pl-4 text-purple-400">use <span className="text-white">x25519_dalek::StaticSecret;</span></div>
                 <div className="pl-4 text-purple-400">use <span className="text-white">aes_gcm::Aes256Gcm;</span></div>
                 <div className="pl-4 text-purple-400">use <span className="text-white">sha2::Sha512;</span></div>
@@ -171,7 +171,7 @@ export default function SecurityPage() {
       </main>
 
       <footer className="border-t border-white/10 bg-[#05080f] py-8 text-center text-sm text-gray-500">
-        <p>© 2024 VOID Enterprise. Zero Unauthorized Traces.</p>
+        <p>© 2024 VAULT Enterprise. Zero Unauthorized Traces.</p>
       </footer>
     </div >
   )

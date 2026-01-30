@@ -17,7 +17,7 @@ export default function DownloadPage() {
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5 text-white" />
             </div>
-            VOID <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
+            VAULT <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <Link href="/features" className="text-sm font-medium text-gray-300 hover:text-white">Product</Link>
@@ -39,7 +39,7 @@ export default function DownloadPage() {
               Flexible Deployment Options
             </h1>
             <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-              Whether you need air-gapped sovereignty or FedRAMP-authorized cloud, VOID adapts to your infrastructure requirements.
+              Whether you need air-gapped sovereignty or FedRAMP-authorized cloud, VAULT adapts to your infrastructure requirements.
             </p>
           </div>
         </section>
@@ -110,7 +110,7 @@ export default function DownloadPage() {
                   <div className="space-y-6">
                     <h2 className="text-3xl font-bold text-white">Total Sovereign Control</h2>
                     <p className="text-gray-400 text-lg">
-                      Deploy VOID inside your secure perimeter. Compatible with Kubernetes, Docker Swarm, and bare metal Linux environments. Support for completely disconnected (air-gapped) networks.
+                      Deploy VAULT inside your secure perimeter. Compatible with Kubernetes, Docker Swarm, and bare metal Linux environments. Support for completely disconnected (air-gapped) networks.
                     </p>
                     <ul className="space-y-4">
                       <li className="flex items-center gap-3 text-gray-300">
@@ -131,8 +131,8 @@ export default function DownloadPage() {
                   </div>
                   <div className="bg-[#111827] border border-white/10 rounded-2xl p-8">
                     <div className="font-mono text-sm text-gray-400">
-                      <div className="text-green-400">$ helm install void-enterprise ./charts</div>
-                      <div className="mt-2">Deploying VOID Controller... Done</div>
+                      <div className="text-green-400">$ helm install vault-enterprise ./charts</div>
+                      <div className="mt-2">Deploying VAULT Controller... Done</div>
                       <div className="mt-1">Deploying Key Server... Done</div>
                       <div className="mt-1">Deploying Message Store... Done</div>
                       <div className="mt-4 text-white">Status: <span className="text-green-400">Running</span></div>
@@ -172,7 +172,7 @@ export default function DownloadPage() {
       </main>
 
       <footer className="border-t border-white/10 bg-[#05080f] py-8 text-center text-sm text-gray-500">
-        <p>© 2024 VOID Enterprise. FIPS 140-2 Validated Module #4092.</p>
+        <p>© 2024 VAULT Enterprise. FIPS 140-2 Validated Module #4092.</p>
       </footer>
     </div>
   )

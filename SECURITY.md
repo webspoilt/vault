@@ -11,12 +11,12 @@
 
 **⚠️ IMPORTANT: Do not create public issues for security vulnerabilities.**
 
-If you discover a security vulnerability in VOID, please report it responsibly:
+If you discover a security vulnerability in VAULT, please report it responsibly:
 
 ### Contact
 
-- **Email**: security@void.messaging
-- **GPG Key**: [Download Public Key](https://void.messaging/security.asc)
+- **Email**: security@vault.messaging
+- **GPG Key**: [Download Public Key](https://vault.messaging/security.asc)
 - **Fingerprint**: `A1B2 C3D4 E5F6 7890 1234 5678 9ABC DEF0 1234 5678`
 
 ### What to Include
@@ -162,16 +162,16 @@ Security updates are released as soon as possible:
 - Low: Bundled with other fixes
 
 Subscribe to security announcements:
-- [Security Advisory RSS](https://void.messaging/security-feed.xml)
-- [GitHub Security Advisories](https://github.com/webspoilt/void/security/advisories)
+- [Security Advisory RSS](https://vault.messaging/security-feed.xml)
+- [GitHub Security Advisories](https://github.com/webspoilt/vault/security/advisories)
 
 ## Contact
 
 For questions about our security policy:
 
-- Email: security@void.messaging
-- PGP: [0x12345678](https://void.messaging/security.asc)
+- Email: security@vault.messaging
+- PGP: [0x12345678](https://vault.messaging/security.asc)
 
 ---
 
-Thank you for helping keep VOID secure! 🔐
+Thank you for helping keep VAULT secure! 🔐

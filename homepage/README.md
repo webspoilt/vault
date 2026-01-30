@@ -1,6 +1,6 @@
-# 🔐 VOID - Secure Messaging Platform
+# 🔐 VAULT - Secure Messaging Platform
 
-The official homepage for VOID - a military-grade encrypted messaging platform built for government and enterprise use.
+The official homepage for VAULT - a military-grade encrypted messaging platform built for government and enterprise use.
 
 ## 🚀 Quick Start
 
@@ -80,7 +80,7 @@ npm start
 ```
 
 Or deploy to Vercel:
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/webspoilt/void-messaging)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/webspoilt/vault-messaging)
 
 ---
 

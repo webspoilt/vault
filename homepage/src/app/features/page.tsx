@@ -18,7 +18,7 @@ export default function FeaturesPage() {
     {
       icon: <Shield className="w-8 h-8" />,
       title: 'Verifiable Integrity',
-      description: 'Cryptographically verifiable operations. Every message state change generates a signed audit log entry that administrators can inspect.',
+      description: 'Cryptographically verifiable operations. Every state change generates a signed audit log entry that administrators can inspect.',
       category: 'governance',
       color: 'from-blue-500/20 to-blue-600/10'
     },
@@ -94,7 +94,7 @@ export default function FeaturesPage() {
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5 text-white" />
             </div>
-            VOID <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
+            VAULT <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <Link href="/features" className="text-sm font-medium text-white border-b-2 border-blue-500 pb-1">Features</Link>
@@ -199,7 +199,7 @@ export default function FeaturesPage() {
       {/* Footer */}
       <footer className="border-t border-white/10 bg-[#05080f] py-12">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-          <p>© 2024 VOID Enterprise. All rights reserved.</p>
+          <p>© 2024 VAULT Enterprise. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link href="/" className="hover:text-white">Home</Link>
             <Link href="/security" className="hover:text-white">Security</Link>

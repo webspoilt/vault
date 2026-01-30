@@ -85,7 +85,7 @@ export default function DemoPage() {
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5 text-white" />
             </div>
-            VOID <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
+            VAULT <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <Link href="/features" className="text-sm font-medium text-gray-300 hover:text-white">Product</Link>
@@ -172,7 +172,7 @@ export default function DemoPage() {
                       <div className="mt-4 text-blue-400"># METADATA</div>
                       <div>Algorithm: Signal Double Ratchet</div>
                       <div>Padding: PKCS#7 (Obfuscated)</div>
-                      <div>Signer: VOID-GOV-ROOT-CA</div>
+                      <div>Signer: VAULT-GOV-ROOT-CA</div>
                     </div>
                   )}
                 </div>
@@ -193,7 +193,7 @@ export default function DemoPage() {
       </main>
 
       <footer className="border-t border-white/10 bg-[#05080f] py-8 text-center text-sm text-gray-500">
-        <p>© 2024 VOID Enterprise. Demo environment - Do not use for actual classified data.</p>
+        <p>© 2024 VAULT Enterprise. Demo environment - Do not use for actual classified data.</p>
       </footer>
     </div>
   )

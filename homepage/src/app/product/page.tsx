@@ -35,14 +35,14 @@ export default function ProductPage() {
   }
 
   const comparisons = [
-    { feature: 'End-to-End Encryption', void: true, whatsapp: true, slack: false, signal: true },
-    { feature: 'Zero Server Storage', void: true, whatsapp: false, slack: false, signal: true },
-    { feature: 'Auto-Delete Default', void: true, whatsapp: false, slack: false, signal: false },
-    { feature: 'Audit Ready Logs', void: true, whatsapp: false, slack: true, signal: false },
-    { feature: 'Organization Controls', void: true, whatsapp: false, slack: true, signal: false },
-    { feature: 'Open Source Core', void: true, whatsapp: false, slack: false, signal: true },
-    { feature: 'Self-Hosted Option', void: true, whatsapp: false, slack: true, signal: false },
-    { feature: 'FIPS 140-2 Validated', void: true, whatsapp: false, slack: false, signal: false },
+    { feature: 'End-to-End Encryption', vault: true, whatsapp: true, slack: false, signal: true },
+    { feature: 'Zero Server Storage', vault: true, whatsapp: false, slack: false, signal: true },
+    { feature: 'Auto-Delete Default', vault: true, whatsapp: false, slack: false, signal: false },
+    { feature: 'Audit Ready Logs', vault: true, whatsapp: false, slack: true, signal: false },
+    { feature: 'Organization Controls', vault: true, whatsapp: false, slack: true, signal: false },
+    { feature: 'Open Source Core', vault: true, whatsapp: false, slack: false, signal: true },
+    { feature: 'Self-Hosted Option', vault: true, whatsapp: false, slack: true, signal: false },
+    { feature: 'FIPS 140-2 Validated', vault: true, whatsapp: false, slack: false, signal: false },
   ]
 
   return (
@@ -55,7 +55,7 @@ export default function ProductPage() {
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5 text-white" />
             </div>
-            VOID <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
+            VAULT <span className="text-xs font-normal text-gray-400 ml-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">ENTERPRISE</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <Link href="/features" className="text-sm font-medium text-gray-300 hover:text-white">Product</Link>
@@ -116,7 +116,7 @@ export default function ProductPage() {
                 <thead>
                   <tr className="border-b border-white/10 bg-white/5">
                     <th className="p-6 text-white font-bold">Feature</th>
-                    <th className="p-6 text-blue-400 font-bold text-center bg-blue-900/10 border-x border-white/10">VOID Enterprise</th>
+                    <th className="p-6 text-blue-400 font-bold text-center bg-blue-900/10 border-x border-white/10">VAULT Enterprise</th>
                     <th className="p-6 text-gray-400 font-medium text-center">WhatsApp</th>
                     <th className="p-6 text-gray-400 font-medium text-center">Slack</th>
                     <th className="p-6 text-gray-400 font-medium text-center">Signal Consumer</th>
@@ -127,7 +127,7 @@ export default function ProductPage() {
                     <tr key={index} className="border-b border-white/5 hover:bg-white/5">
                       <td className="p-6 text-gray-200 font-medium">{row.feature}</td>
                       <td className="p-6 text-center bg-blue-900/5 border-x border-white/10">
-                        {row.void ? <Check className="w-6 h-6 text-blue-500 mx-auto" /> : <X className="w-6 h-6 text-gray-600 mx-auto" />}
+                        {row.vault ? <Check className="w-6 h-6 text-blue-500 mx-auto" /> : <X className="w-6 h-6 text-gray-600 mx-auto" />}
                       </td>
                       <td className="p-6 text-center">
                         {row.whatsapp ? <Check className="w-6 h-6 text-green-500 mx-auto" /> : <X className="w-6 h-6 text-gray-600 mx-auto" />}
@@ -149,7 +149,7 @@ export default function ProductPage() {
         {/* CTA */}
         <section className="py-24 px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-8">Deploy VOID Today</h2>
+            <h2 className="text-3xl font-bold text-white mb-8">Deploy VAULT Today</h2>
             <div className="flex gap-4 justify-center">
               <Link href="/contact-sales" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors">
                 Contact Sales
@@ -163,7 +163,7 @@ export default function ProductPage() {
       </main>
 
       <footer className="border-t border-white/10 bg-[#05080f] py-8 text-center text-sm text-gray-500">
-        <p>© 2024 VOID Enterprise. Verifiable Operations Integrity Defense.</p>
+        <p>© 2024 VAULT Enterprise. Verifiable Operations Integrity Defense.</p>
       </footer>
     </div>
   )

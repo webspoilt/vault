@@ -1,6 +1,6 @@
-# 🤝 Contributing to VOID
+# 🤝 Contributing to VAULT
 
-Thank you for your interest in contributing to VOID! This document provides guidelines and instructions for contributing to the project.
+Thank you for your interest in contributing to VAULT! This document provides guidelines and instructions for contributing to the project.
 
 ## 📋 Table of Contents
 
@@ -33,11 +33,11 @@ This project and everyone participating in it is governed by our commitment to:
 
 ```bash
 # Fork the repository on GitHub, then clone your fork
-git clone https://github.com/YOUR_USERNAME/void.git
-cd void
+git clone https://github.com/YOUR_USERNAME/vault.git
+cd vault
 
 # Add upstream remote
-git remote add upstream https://github.com/webspoilt/void.git
+git remote add upstream https://github.com/webspoilt/vault.git
 ```
 
 ## 🛠️ Development Setup
@@ -69,7 +69,7 @@ go mod download
 go test -v ./...
 
 # Build binary
-go build -o void-relay ./cmd/relay
+go build -o vault-relay ./cmd/relay
 ```
 
 ### 3. Web Client
@@ -152,7 +152,7 @@ security(core): fix timing attack in scalar multiplication
 - Maintain test coverage above 80%
 
 ```rust
-/// Encrypts a message using the void encryption
+/// Encrypts a message using the vault encryption
 ///
 /// # Arguments
 ///
@@ -233,7 +233,7 @@ All cryptographic code must:
 **DO NOT** create public issues for security vulnerabilities.
 
 Instead:
-- Email: security@void.messaging
+- Email: security@vault.messaging
 - Include detailed reproduction steps
 - Allow 90 days for disclosure
 
@@ -309,9 +309,9 @@ Look for issues labeled `good-first-issue` or `help-wanted`.
 
 ## 📞 Getting Help
 
-- **Discord**: [Join our server](https://discord.gg/void)
+- **Discord**: [Join our server](https://discord.gg/vault)
 - **Discussions**: Use GitHub Discussions for questions
-- **Documentation**: Check [docs.void.messaging](https://docs.void.messaging)
+- **Documentation**: Check [docs.vault.messaging](https://docs.vault.messaging)
 
 ## 🙏 Recognition
 
