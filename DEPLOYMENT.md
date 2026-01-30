@@ -1,12 +1,12 @@
 # Deployment Guide
 
-This guide covers deploying BlackHole In Space on various platforms.
+This guide covers deploying VOID on various platforms.
 
 ## Quick Deploy Options
 
 ### 1. Vercel (Recommended for Homepage)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/webspoilt/blackhole_in_space)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/webspoilt/void)
 
 **Steps:**
 1. Push code to GitHub (already done!)
@@ -53,7 +53,7 @@ npm install
 npm install @capacitor/core @capacitor/android
 
 # Initialize Capacitor
-npx cap init BlackHole com.forticomm.blackhole
+npx cap init VOID com.void.messaging
 
 # Add Android platform
 npx cap add android

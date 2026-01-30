@@ -11,12 +11,12 @@
 
 **⚠️ IMPORTANT: Do not create public issues for security vulnerabilities.**
 
-If you discover a security vulnerability in FortiComm Black Hole, please report it responsibly:
+If you discover a security vulnerability in VOID, please report it responsibly:
 
 ### Contact
 
-- **Email**: security@forticomm.blackhole
-- **GPG Key**: [Download Public Key](https://forticomm.blackhole/security.asc)
+- **Email**: security@void.messaging
+- **GPG Key**: [Download Public Key](https://void.messaging/security.asc)
 - **Fingerprint**: `A1B2 C3D4 E5F6 7890 1234 5678 9ABC DEF0 1234 5678`
 
 ### What to Include
@@ -162,16 +162,16 @@ Security updates are released as soon as possible:
 - Low: Bundled with other fixes
 
 Subscribe to security announcements:
-- [Security Advisory RSS](https://forticomm.blackhole/security-feed.xml)
-- [GitHub Security Advisories](https://github.com/forticomm/blackhole/security/advisories)
+- [Security Advisory RSS](https://void.messaging/security-feed.xml)
+- [GitHub Security Advisories](https://github.com/webspoilt/void/security/advisories)
 
 ## Contact
 
 For questions about our security policy:
 
-- Email: security@forticomm.blackhole
-- PGP: [0x12345678](https://forticomm.blackhole/security.asc)
+- Email: security@void.messaging
+- PGP: [0x12345678](https://void.messaging/security.asc)
 
 ---
 
-Thank you for helping keep FortiComm Black Hole secure! 🕳️🔒
+Thank you for helping keep VOID secure! 🔐

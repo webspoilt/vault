@@ -1,6 +1,6 @@
-# 🕳️ Changelog
+# 🔐 Changelog
 
-All notable changes to FortiComm Black Hole will be documented in this file.
+All notable changes to VOID will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Initial release of FortiComm Black Hole
+- Initial release of VOID
 - Rust cryptographic core with WebAssembly bindings
 - Signal Protocol Double Ratchet implementation
 - MLS (Messaging Layer Security) for group messaging
@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2024-01-XX
 
 ### Added
-- 🕳️ Black Hole core library
+- 🔐 VOID core library
   - Event Horizon encryption
   - Singularity key management
   - Panic wipe functionality
@@ -110,4 +110,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-For the complete list of changes, see the [Git commit history](https://github.com/forticomm/blackhole/commits/main).
+For the complete list of changes, see the [Git commit history](https://github.com/webspoilt/void/commits/main).

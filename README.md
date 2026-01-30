@@ -1,12 +1,12 @@
-# 🕳️ BlackHole In Space
+# 🔐 VOID
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/forticomm/blackhole/main/assets/blackhole-logo.svg" width="200" alt="BlackHole In Space">
+  <img src="https://raw.githubusercontent.com/webspoilt/void/main/assets/void-logo.svg" width="200" alt="VOID">
 </p>
 
 <p align="center">
-  <b>The Messaging Platform That Swallows All Traces</b><br>
-  <i>What enters the event horizon, never leaves. Not even light. Not even hackers.</i>
+  <b>The Secure Messaging Platform That Swallows All Traces</b><br>
+  <i>What enters the void, never leaves. Not even light. Not even hackers.</i>
 </p>
 
 <p align="center">
@@ -19,7 +19,7 @@
 
 ## 🌌 Overview
 
-**BlackHole In Space** is a mathematically unbreakable messaging platform. Like a black hole's event horizon, once your message enters our encrypted core, it becomes **mathematically impossible** to retrieve without the proper keys.
+**VOID** is a mathematically unbreakable messaging platform. Like an event horizon, once your message enters our encrypted core, it becomes **mathematically impossible** to retrieve without the proper keys.
 
 ### Key Features
 
@@ -64,7 +64,7 @@
 ## 📁 Project Structure
 
 ```
-blackhole_in_space/
+void/
 ├── core/           # Rust cryptographic engine (WASM)
 ├── server/         # Go relay server
 ├── web/            # React web client
@@ -89,14 +89,14 @@ blackhole_in_space/
 
 ```bash
 # Clone the repository
-git clone https://github.com/webspoilt/blackhole_in_space.git
-cd blackhole_in_space
+git clone https://github.com/webspoilt/void.git
+cd void
 
 # Build Rust crypto core
 cd core && cargo build --release && cd ..
 
 # Build Go relay server
-cd server && go build -o blackhole-relay ./cmd/relay && cd ..
+cd server && go build -o void-relay ./cmd/relay && cd ..
 
 # Build web client
 cd web && npm install && npm run build && cd ..
@@ -146,7 +146,7 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ```bash
 # Fork and clone
-git clone https://github.com/webspoilt/blackhole_in_space.git
+git clone https://github.com/webspoilt/void.git
 
 # Create feature branch
 git checkout -b feature/amazing-feature
@@ -169,7 +169,7 @@ MIT License - See [LICENSE](LICENSE) for details.
 ---
 
 <p align="center">
-  <b>🕳️ BlackHole In Space</b><br>
+  <b>🔐 VOID</b><br>
   <i>Where Messages Go to Never Be Found</i><br><br>
   Created by <b>zeroday</b> 🔐
 </p>
