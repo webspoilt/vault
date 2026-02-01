@@ -45,7 +45,7 @@ git remote add upstream https://github.com/webspoilt/vault.git
 ### 1. Rust Core
 
 ```bash
-cd core
+cd backend/core
 
 # Install dependencies
 cargo build
@@ -60,7 +60,7 @@ wasm-pack build --target web
 ### 2. Go Server
 
 ```bash
-cd server
+cd backend/server
 
 # Download dependencies
 go mod download
@@ -75,7 +75,7 @@ go build -o vault-relay ./cmd/relay
 ### 3. Web Client
 
 ```bash
-cd web
+cd web/client
 
 # Install dependencies
 npm install
