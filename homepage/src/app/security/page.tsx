@@ -142,21 +142,24 @@ export default function SecurityPage() {
           <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="bg-[#111827] border border-white/10 p-6 rounded-xl text-center">
               <div className="text-2xl font-bold text-white mb-2">FedRAMP</div>
-              <div className="text-green-400 text-sm font-semibold">Ready</div>
+              <div className="text-yellow-400 text-sm font-semibold">Aligned*</div>
             </div>
             <div className="bg-[#111827] border border-white/10 p-6 rounded-xl text-center">
               <div className="text-2xl font-bold text-white mb-2">FIPS 140-2</div>
-              <div className="text-green-400 text-sm font-semibold">Validated</div>
+              <div className="text-yellow-400 text-sm font-semibold">Targeted*</div>
             </div>
             <div className="bg-[#111827] border border-white/10 p-6 rounded-xl text-center">
               <div className="text-2xl font-bold text-white mb-2">SOC 2</div>
-              <div className="text-green-400 text-sm font-semibold">Type II</div>
+              <div className="text-yellow-400 text-sm font-semibold">Roadmap*</div>
             </div>
             <div className="bg-[#111827] border border-white/10 p-6 rounded-xl text-center">
               <div className="text-2xl font-bold text-white mb-2">HIPAA</div>
-              <div className="text-green-400 text-sm font-semibold">Compliant</div>
+              <div className="text-yellow-400 text-sm font-semibold">Designed For*</div>
             </div>
           </div>
+          <p className="text-center text-xs text-gray-500 mt-4 max-w-2xl mx-auto">
+            * Compliance certifications are in progress. Contact sales for current audit status and roadmap.
+          </p>
         </section>
 
         {/* Agency VDP */}
