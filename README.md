@@ -66,18 +66,16 @@
 
 ```
 vault/
-├── backend/        # Core platform backend (Rust/Go)
-│   ├── core/       # Rust cryptographic engine
-│   ├── server/     # Go relay server
-├── desktop/        # Native Desktop Apps
-│   ├── macos/      # MacOS Build
-│   ├── linux/      # Linux Build
-│   ├── windows/    # Windows Build
+├── homepage/       # The Next.js Marketing Site (Deployed to Vercel)
+├── web/            # The React Web Application (Vite)
 ├── mobile/         # Mobile Apps
-│   ├── VaultiOS/     # iOS App (Swift)
-│   ├── VaultAndroid/ # Android App (Kotlin/Java)
-├── homepage/       # Next.js Marketing Site (Vercel)
-├── web/            # React Web App (Vite)
+│   ├── VaultiOS/     # iOS App (Renamed from ios)
+│   ├── VaultAndroid/ # Android App (Renamed from android)
+├── desktop/        # Native Desktop Apps
+│   ├── macos/
+│   ├── linux/
+│   ├── windows/
+├── backend/        # Core platform backend services
 ├── .github/        # CI/CD workflows
 └── docker-compose.yml
 ```
