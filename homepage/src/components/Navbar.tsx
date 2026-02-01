@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Shield, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
@@ -14,10 +15,14 @@ export default function Navbar() {
     return (
         <nav className="fixed top-0 w-full z-50 border-b border-slate-800/60 backdrop-blur-md bg-[#0f172a]/90">
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                <Link href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-                    <div className="w-8 h-8 bg-blue-700 rounded-lg flex items-center justify-center shadow-lg shadow-blue-900/20">
-                        <Shield className="w-5 h-5 text-white" />
-                    </div>
+                <Link href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-3">
+                    <Image
+                        src="/favicon.png"
+                        alt="VAULT Logo"
+                        width={40}
+                        height={40}
+                        className="rounded-lg"
+                    />
                     VAULT <span className="text-xs font-normal text-slate-400 ml-1 px-2 py-0.5 rounded-full bg-slate-800 border border-slate-700">ENTERPRISE</span>
                 </Link>
 
