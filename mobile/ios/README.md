@@ -79,7 +79,7 @@ cd vault
 ### 2. Set Up iOS Project
 
 ```bash
-cd mobile/VaultiOS
+cd mobile/ios
 ./Scripts/setup_project.sh
 ```
 

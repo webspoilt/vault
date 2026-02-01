@@ -69,8 +69,8 @@ vault/
 ├── homepage/       # The Next.js Marketing Site (Deployed to Vercel)
 ├── web/            # The React Web Application (Vite)
 ├── mobile/         # Mobile Apps
-│   ├── VaultiOS/     # iOS App (Renamed from ios)
-│   ├── VaultAndroid/ # Android App (Renamed from android)
+│   ├── ios/        # iOS App (Swift)
+│   ├── android/    # Android App (Kotlin/Java)
 ├── desktop/        # Native Desktop Apps
 │   ├── macos/
 │   ├── linux/
