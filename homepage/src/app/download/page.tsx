@@ -55,16 +55,23 @@ export default function DownloadPage() {
                 <div className="bg-[#1e293b] border border-slate-700 rounded-xl p-6 hover:border-blue-500/50 transition-colors cursor-pointer group">
                   <div className="flex flex-col sm:flex-row justify-between items-start mb-4 gap-4 sm:gap-0">
                     <div className="flex items-center gap-3">
-                      <Terminal className="w-8 h-8 text-slate-300 group-hover:text-amber-400 transition-colors" />
+                      <HardDrive className="w-8 h-8 text-slate-300 group-hover:text-green-400 transition-colors" />
                       <div>
-                        <div className="font-bold text-white">Linux Server Bundle</div>
-                        <div className="text-xs text-slate-400">RHEL/CentOS 8+ | Docker | 420MB</div>
+                        <div className="font-bold text-white">Offline Air-Gap Bundle</div>
+                        <div className="text-xs text-slate-400">All Dependencies Included | 1.2GB</div>
                       </div>
                     </div>
-                    <span className="px-2 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-600">Air-Gap Ready</span>
+                    <span className="px-2 py-1 bg-green-900/30 text-green-400 text-xs font-bold rounded border border-green-500/30">SIPRNet Ready</span>
                   </div>
-                  <p className="text-sm text-slate-400 mb-4">Container images and orchestration scripts for on-premise hosting.</p>
-                  <button className="text-blue-400 text-sm font-semibold hover:text-blue-300 flex items-center gap-1">Download .tar.gz <Download className="w-3 h-3" /></button>
+                  <p className="text-sm text-slate-400 mb-4">
+                    Complete installer with all dependencies (Rust, Go, Node runtimes) pre-packaged.
+                    <b> No internet connection required.</b> Supports Windows MSI, MacOS DMG, and RHEL RPM.
+                  </p>
+                  <div className="flex gap-2">
+                    <button className="text-blue-400 text-sm font-semibold hover:text-blue-300 flex items-center gap-1">Download .iso <Download className="w-3 h-3" /></button>
+                    <span className="text-slate-600">|</span>
+                    <button className="text-blue-400 text-sm font-semibold hover:text-blue-300 flex items-center gap-1">SHA-256 Checksum</button>
+                  </div>
                 </div>
               </div>
 

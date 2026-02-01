@@ -52,6 +52,24 @@ export default function SecurityPage() {
               </p>
             </div>
           </div>
+
+          {/* Dual Channel Architecture Diagram Description */}
+          <div className="max-w-7xl mx-auto mt-12 p-8 bg-[#111827] border border-white/10 rounded-2xl">
+            <div className="flex items-start gap-6">
+              <Server className="w-12 h-12 text-purple-500 flex-shrink-0" />
+              <div>
+                <h3 className="text-xl font-bold text-white mb-4">Dual-Channel Architecture (Data Diode Support)</h3>
+                <p className="text-gray-400 leading-relaxed mb-6">
+                  For high-assurance networks (SIPRNet/JWICS), VAULT supports a split-tier architecture.
+                  The <b>Relay</b> sits on the transport network (Low Side), while the <b>Database & Core</b> sit on the secure network (High Side),
+                  connected only via a hardware Data Diode or strict one-way firewall rules. This physically prevents data exfiltration.
+                </p>
+                <div className="font-mono text-xs md:text-sm text-blue-300 bg-black/50 p-4 rounded border border-blue-900/50 whitespace-pre overflow-x-auto">
+                  [Internet/NIPR] --&gt; [Relay Node] --&gt; || DATA DIODE || --&gt; [Secure Core DB] (SIPR)
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Technical Deep Dive */}

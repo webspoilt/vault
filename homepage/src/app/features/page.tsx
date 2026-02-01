@@ -24,6 +24,13 @@ export default function FeaturesPage() {
     },
     {
       icon: <Lock className="w-8 h-8" />,
+      title: 'Smart Card Auth (PKCS#11)',
+      description: 'Native support for hardware tokens (CAC, PIV, YubiKey) via PKCS#11. Mandates hardware-backed certificates for user login; no insecure passwords.',
+      category: 'security',
+      color: 'from-orange-500/20 to-orange-600/10'
+    },
+    {
+      icon: <Lock className="w-8 h-8" />,
       title: 'Zero Unauthorized Traces',
       description: 'System architecture ensures service providers (us) have zero visibility. Data remains accessible only to authorized agency administrators with keys.',
       category: 'security',
