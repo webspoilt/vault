@@ -186,7 +186,7 @@ export default function FeaturesPage() {
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link href="/" className="hover:text-white">Home</Link>
             <Link href="/security" className="hover:text-white">Security</Link>
-            <Link href="/bounty" className="hover:text-white">Vulnerability Program</Link>
+
           </div>
         </div>
       </footer>
