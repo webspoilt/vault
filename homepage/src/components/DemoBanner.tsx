@@ -27,10 +27,10 @@ export default function DemoBanner() {
                             </a>
                             . Contact us at{" "}
                             <a
-                                href="mailto:contact@vault.in"
+                                href="mailto:heyzerodayhere@gmail.com"
                                 className="underline hover:text-blue-400 transition-colors"
                             >
-                                contact@vault.in
+                                heyzerodayhere@gmail.com
                             </a>
                         </span>
                     </div>
